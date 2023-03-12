@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+ 
+    <link rel="stylesheet" href="Approver.css">
+    <title>Travel Order and Gatepass Management System </title>
+  
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+            <!-- sidebar menu -->
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bx-user-circle'></i>
+      <img src="profile.png" alt="">
+      <span class="logo_name">Approver<br>TOD</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#" >
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">DASHBOARD</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bxs-group' ></i>
+            <span class="links_name">TRAVEL REQUEST</span>
+          </a>
+        </li>
+    
+        <li>
+          <a href="#">
+            <i class='bx bx-folder' ></i>
+            <span class="links_name">GATEPASS REQUEST</span>
+          </a>
+        </li>
+
+        <li>
+            <a href="Approver.html" class="active">
+              <i class='bx bx-folder' ></i>
+              <span class="links_name">SEND REQUEST</span>
+            </a>
+        </li>
+        <li class="log_out">
+          <a href="../index.php">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <span class="profile">SEND REQUESTS</span>
+      </div>
+    </nav>
+
+    <div class="search-bar">
+        <form action="" class="srch-bar">
+            <input type="text" placeholder="Search..." name="q">
+            <button type="submit">Search</button>
+            <a href="" class="btn"><button type="reset">Reset</button></a>
+            <a href="" class="btn-upload"><button type="button">UPLOAD</button></a>
+        </form>
+    </div>
+    <div class="file">
+      <div class="file-preview">
+        <img src="profile.png">
+      </div>
+      <div class="file-info">
+         Travel Order form.pdf
+      </div>
+      <div class="file-action">
+        <button type="button" class="view-btn">View</button>
+        <button type="button" class="download-btn">Download</button>
+      </div>
+    </div>
+
+    <div class="file">
+      <div class="file-preview">
+        <img src="profile.png">
+      </div>
+      <div class="file-info">
+         Travel Order form.pdf
+      </div>
+      <div class="file-action">
+        <button type="button" class="view-btn">View</button>
+        <button type="button" class="download-btn">Download</button>
+      </div>
+    </div>
+    <div class="file">
+      <div class="file-preview">
+        <img src="profile.png">
+      </div>
+      <div class="file-info">
+         Travel Order form.pdf
+      </div>
+      <div class="file-action">
+        <button type="button" class="view-btn">View</button>
+        <button type="button" class="download-btn">Download</button>
+      </div>
+    </div>
+
+    <div class="file">
+      <div class="file-preview">
+        <img src="profile.png">
+      </div>
+      <div class="file-info">
+         Travel Order form.pdf
+      </div>
+      <div class="file-action">
+        <button type="button" class="view-btn">View</button>
+        <button type="button" class="download-btn">Download</button>
+      </div>
+    </div>
+
+    <div class="file">
+      <div class="file-preview">
+        <img src="profile.png">
+      </div>
+      <div class="file-info">
+         Travel Order form.pdf
+      </div>
+      <div class="file-action">
+        <button type="button" class="view-btn">View</button>
+        <button type="button" class="download-btn">Download</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
+
+

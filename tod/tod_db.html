@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+ 
+    <link rel="stylesheet" href="tod_db_style.css">
+    <title>Travel Order and Gatepass Management System </title>
+  
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+        <!-- sidebar menu -->
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bx-user-circle'></i>
+      <span class="logo_name">Admin TOD</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="tod_db.html" class="active">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">DASHBOARD</span>
+          </a>
+        </li>
+         <li>
+          <a href="tod_rp.html">
+          <i class='bx bxs-plane-take-off' ></i>
+            <span class="links_name">TRAVEL REQUEST</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class='bx bx-door-open'></i>
+            <span class="links_name">GATEPASS REQUEST</span>
+          </a>
+        </li>
+		 <li>
+          <a href="#">
+            <i class='bx bx-send' ></i>
+            <span class="links_name">SEND REQUEST</span>
+          </a>
+        </li>
+       
+        <li class="log_out">
+          <a href="../index.php">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  
+  
+ 
+  <section class="home-section">
+  <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">DASHBOARD</span>
+      </div>
+    </nav>
+
+    <div class="home-content">
+            <div class="overview-boxes">
+        <div class="box one">
+          <div class="right-side">
+		  <i class='bx bx-loader pic gate'></i>
+            <div class="box-topic">Pending</div>
+			 <div class="number">0</div>
+		 </div>
+          
+        </div>
+        <div class="box two">
+          <div class="right-side">
+		  	<i class='bx bxs-like' ></i>
+            <div class="box-topic">Approved</div>
+			<div class="number">0</div>		             
+          </div>
+        </div>
+		
+		 <div class="box three">
+          <div class="right-side">
+			<i class='bx bxs-dislike'></i>		   
+            <div class="box-topic">Disapproved</div>
+			<div class="number">0</div>
+          </div>
+        </div>          
+    </div>
+  
+      
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+ 
+    <link rel="stylesheet" href="style.css">
+    <title>Admin-Manage Users </title>
+  
+    <!-- Bootstrap CSS File-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    
+    <!--Header-->
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="profile.png" alt="">
+      <span class="logo_name">Admin</span>
+    </div>
+
+<!-- sidebar menu -->
+      <ul class="nav-links">
+        <li>
+          <a href="index.html">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="User.html" class="active">
+            <i class='bx bxs-group'></i>
+            <span class="links_name">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="tra_request.html">
+            <i class='bx bx-clipboard' ></i>
+            <span class="links_name">Request Records</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="../index.php">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">User Management</span>
+      </div>
+       <div class="profile-details">
+        <img src="profile.png" alt="" onclick="toggleMenu()">
+        <span class="admin_name" onclick="toggleMenu()">Administrator </span>
+      </div>
+
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="profile.png" alt="">
+            <h5>Administrator</h5>
+          </div>
+          <hr>
+
+            <a href="profile.html" class="sub-menu-link">
+              <i class='fa fa-user' ></i>
+              <p> View Profile </p>
+              <span>></span>
+            </a>
+            <a href="changepass.html" class="sub-menu-link">
+              <i class='fa fa-lock' ></i>
+              <p> Change Password </p>
+              <span>></span>
+            </a>
+            <a href="../index.php" class="sub-menu-link">
+              <i class='fa fa-sign-out'></i>
+              <p> Logout </p>
+              <span>></span>
+            </a>
+
+        </div>
+      </div>
+    </nav>
+
+     <!-- Modal -->
+        <div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="AddUserModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="AddUserModalLabel">Add New User</h5>
+              </div>
+              <div class="modal-body">
+
+                <!-- Form to be fill-out to add new user -->
+                <form>
+                	<div class="profile_pic">
+                      <img src="profile.png" id="output" width=100 height=100 alt="">
+                      <div class="round">
+                        <input id="file" type="file" onchange="loadFile(event)"/>
+                        <i class="fa fa-camera" style="color:#fff"></i>
+                      </div>
+                    </div>
+
+                    <div class="full_name">
+                      <label for="addUser01">First Name*</label>
+                      <input type="text" class="form-control" id="addUser01" required >
+                    </div><br>
+
+                    <div class="age">
+                      <label for="age">Last Name*</label>
+                      <input type="text" class="form-control" id="age" required >
+                    </div><br>
+
+                    <div class="position">
+                      <label for="addUser02">Position*</label>
+                      <input type="text" class="form-control" id="addUser02" required>
+                    </div><br>
+
+
+                    <div class="region">
+                      <label for="addUser03">Email*</label>
+                      <input type="text" class="form-control" id="addUser03" required>
+                    </div><br>
+
+
+                    <div class="province">
+                      <label for="addUser04">Role*</label>
+                      <input type="text" class="form-control" id="addUser04" required>
+                    </div><br>
+
+                    <div class="user_email">
+                      <label for="addUser06">User Name*</label>
+                      <input type="text" class="form-control" id="addUser07" required>
+                    </div><br>
+
+                    <div class="password">
+                      <label for="addUser07">Password*</label>
+                      <input type="text" class="form-control" id="addUser08" required>
+                    </div><br>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Add User</button>
+                    </div><br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  
+    <div class="home-content">
+      <div class="table">
+          <div class="btn">
+              <a href="user.html">Staff</a> >
+              <a href="RO_Account.html">Record Officer</a> >
+              <a href="TOD_Account.html" class="act">Head TOD</a> >
+              <a href="RD_Account.html">Regional Director</a> >
+              <a href="admin_Account.html">Admin</a>
+          </div>
+      	<div class="table_ctnt">
+        
+      <div class="search">
+          <input class="search-box" placeholder="search">
+          <button class="search_here"><i class='bx bx-search'></i></button>
+      </div>
+
+      <div class="table_section">
+        <table class="table_content">
+          <thead>
+
+            <!--Modal - Button used to add new user-->
+            <div class="add">
+             <button type="button" class="addUser" data-toggle="modal" data-target="#AddUserModal"><i class="bx bx-user-plus"></i>
+              Add New User
+            </button>
+            </div><br>
+
+            <!-- Table for list of users -->
+            <tr>
+              <th width="100px">ID NO.</th>
+              <th>IMAGE</th>
+              <th>USERNAME</th>
+              <th width="500px">FIRST NAME</th>
+              <th width="150px">LAST NAME</th>
+              <th width="100px">POSITION</th>
+              <th width="200px">EMAIL</th>
+              <th width="150px">ROLE</th>
+              <th width="200px">ACTION</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr>
+              <td>1245678</td>
+              <td><img src="profile.png" width=50 height=50 alt=""></td>
+              <td>TOD</td>
+              <td>Emmanuel</td>
+              <td>Aguilar</td>
+              <td>Haad</td>
+              <td>head@gmail.com</td>
+              <td>Head TOD</td>
+              <td>
+                <button class="view"><i class="fa fa-eye"></i></button>
+                <button class="edit"><i class="fa fa-edit"></i></button>
+                <button class="delete"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+      </div>
+
+      
+    </div>
+
+  </section>
+
+<!--Sidebar-->
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+ <!-- Admin profile Submenu-->
+<script>
+    let subMenu=document.getElementById("subMenu");
+
+    function toggleMenu(){
+      subMenu.classList.toggle("open-menu");
+    }
+</script>
+
+<script>
+	var loadFile = function (event) {
+  var image = document.getElementById("output");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+	</script>
+
+
+<!-- Bootstrap Popper with Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
