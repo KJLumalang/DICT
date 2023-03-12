@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
   <head>
     <meta charset="UTF-8">
@@ -13,7 +12,7 @@
       <div class="image-box">
         <img src="logo.png" alt="">
       </div>
-    <form  action="index.php" method="post"	>
+    <form  action="log.php" method="post"	>
 	
 	
       <div class="topic">LOGIN</div>

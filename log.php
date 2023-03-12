@@ -31,8 +31,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['name'] = $row['name'];
             	$_SESSION['id'] = $row['id'];
-            	header("Location: tod_db.php");
-		        exit();
+
+				if($row['userType']=='admin'){
+					header("Location: admin/index.html");
+					exit();
+				}
+				else{
+					header("Location: staff/index.html");
+					exit();
+				}
+
+
+            	
             }else{
 				header("Location: log.php?error=Incorrect username or password");
 		        exit();
