@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-error_reporting();
+error_reporting(0);
 include ('../includes/config.php');
 
 // Retrieve user input from registration form
