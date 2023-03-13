@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+ 
+    <link rel="stylesheet" href="approver_style.css">
+    <title>Approver-Travel Request </title>
+  
+    
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    
+     <!-- sidebar menu -->
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="profile.png" alt="">
+      <span class="logo_name">Approver</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="approver_travel.html" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Travel Request</span>
+          </a>
+        </li>
+        <li>
+          <a href="approver_gatepass.html">
+            <i class='bx bx-clipboard' ></i>
+            <span class="links_name">Gatepass Request</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="login.html">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+      </div>
+       <div class="profile-details">
+        <img src="profile.png" alt="" onclick="toggleMenu()">
+        <span class="admin_name" onclick="toggleMenu()">Approver</span>
+      </div>
+
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="profile.png" alt="">
+            <h5>Approver</h5>
+          </div>
+          <hr>
+
+            <a href="approver_profile.html" class="sub-menu-link">
+              <i class='fa fa-user' ></i>
+              <p> View Profile </p>
+              <span>></span>
+            </a>
+            <a href="approver_changepass.html" class="sub-menu-link">
+              <i class='fa fa-lock' ></i>
+              <p> Change Password </p>
+              <span>></span>
+            </a>
+            <a href="login.html" class="sub-menu-link">
+              <i class='fa fa-sign-out'></i>
+              <p> Logout </p>
+              <span>></span>
+            </a>
+
+        </div>
+      </div>
+    </nav>
+
+     
+  
+    <div class="home-content">
+      <div class="table">
+          
+    <!--List of Travel Request that will be checked by the approver-->
+      	<div class="table_ctnt">
+
+        <div class="twelve">
+          <h4>List of Travel Request</h4>
+        </div>
+
+      <div class="search">
+          <input class="search-box" placeholder="search">
+          <button class="search_here"><i class='bx bx-search'></i></button>
+      </div><br>
+
+      <div class="table_section">
+        <table class="table_req">
+          
+          <tbody>
+          
+          <tr>
+            <td data-label="DATE REQUESTED">02-07-2023</td>
+             <td data-label="TRAVEL ORDER NUMBER">2023-07-003</td>
+            <td data-label="CONTROL NUMBER">2023-07-0011</td>
+            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="Travel Order_Juan Dela Cruz_02-07-2023.pdf">Travel Order_Juan Dela Cruz_02-07-2023.pdf</a></td>
+            <td height="80px" data-label="SIGNED/APPROVED REQUEST">
+              <input class="upload_btn" type="file" id="upload-file" name="filename">
+              <button for= "upload-file" class="upload_btn" id="uploading" value="Upload">
+                <div class="loader">
+                      <i class="fa-solid fa-circle-notch icon spinner"></i>
+                      <span class="btn-text" user-selcect="none" >Upload File</span>
+                  </div>
+              </button>
+            </td>
+            <td data-label="ACTION">
+              <button class="action_btn" id="approve" value="Approve">Approve</button>
+              <button class="action_btn" id="disapprove" value="Disapprove">Disapprove</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+    </div>
+
+      
+    </div>
+
+  </section>
+
+<script>
+            let btn = document.querySelector(".loader"),
+                spinIcon = document.querySelector(".spinner"),
+                btnText = document.querySelector(".btn-text");
+
+            btn.addEventListener("click", () => {
+                btn.style.cursor = "wait";
+                btn.classList.add("checked");
+                spinIcon.classList.add("spin");
+                btnText.textContent = "Uploading";
+
+            setTimeout(() => {
+                btn.style.pointerEvents = "none";
+                spinIcon.classList.replace("spinner", "check");
+                spinIcon.classList.replace("fa-spinner", "fa-check");
+                btnText.textContent = "File Uploaded";
+
+            }, 5000) //1s = 1000ms
+            });
+</script>
+
+<!--Sidebar-->
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+ <!-- Admin profile Submenu-->
+<script>
+    let subMenu=document.getElementById("subMenu");
+
+    function toggleMenu(){
+      subMenu.classList.toggle("open-menu");
+    }
+</script>
+
+<script>
+	var loadFile = function (event) {
+  var image = document.getElementById("output");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+	</script>
+
+
+<!-- Bootstrap Popper with Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
