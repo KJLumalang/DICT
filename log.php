@@ -36,11 +36,36 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					header("Location: admin/index.html");
 					exit();
 				}
+				
+				elseif($row['userType']=='regionalDirector'){
+					header("Location: ro/index.html");
+					exit();
+				}
+
+				elseif($row['userType']=='tod'){
+					header("Location: tod/index.html");
+					exit();
+				}
+
+				elseif($row['userType']=='hr'){
+					header("Location: hr/index.html");
+					exit();
+				}
+
+				elseif($row['userType']=='afd'){
+					header("Location: hr/index.html");
+					exit();
+				}
+
+				elseif($row['userType']=='recordOfficer'){
+					header("Location: ro/index.html");
+					exit();
+				}
+			
 				else{
 					header("Location: staff/index.html");
 					exit();
 				}
-
 
             	
             }else{
