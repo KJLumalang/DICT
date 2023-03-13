@@ -1,8 +1,50 @@
-<!DOCTYPE html>
 <?php 
 session_start(); 
-include ('includes/config.php');
+error_reporting();
+include ('../includes/config.php');
+
+// Retrieve user input from registration form
+if(isset($_POST['submit'])){
+
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sex = $_POST['sex'];
+    $age = $_POST['age'];
+    $position = $_POST['position'];
+    $role = $_POST['role'];
+    $region = $_POST['region'];
+    $province = $_POST['province'];
+    $municipality = $_POST['municipality'];
+    $division = $_POST['division'];
+
+
+
+    $query=mysqli_query($conn,"insert into users(fullName,username,password,sex,age,position,userType,region,province,municipality,division) value('$fullname','$email','$password','$sex','$age','$position','$role','$region','$province','$municipality','$division')");
+    
+    if($query){
+
+      $alertStyle ="alert alert-success";
+      $statusMsg="Student Added Successfully!";
+
+    }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
+
+    }
+}
+ 
+
 ?>
+
+
+
+
+
+
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -103,7 +145,7 @@ include ('includes/config.php');
               <div class="modal-body">
 
                 <!-- Form to be fill-out to add new user -->
-                <form>
+                <form method="POST">
                 	<div class="profile_pic">
                       <img src="profile.png" id="output" width=100 height=100 alt="">
                       <div class="round">
@@ -114,7 +156,7 @@ include ('includes/config.php');
 
                     <div class="full_name">
                       <label for="addUser01">Full Name*</label>
-                      <input type="text" class="form-control" id="addUser01" required >
+                      <input type="text" class="form-control" id="addUser01" name="fullname" required >
                     </div><br>
 
                     <div class="sex">
@@ -127,55 +169,55 @@ include ('includes/config.php');
 
                     <div class="age">
                       <label for="age">Age*</label>
-                      <input type="text" class="form-control" id="age" required >
+                      <input type="text" class="form-control" id="age" name="age" required >
                     </div><br>
 
                     <div class="position">
                       <label for="addUser02">Position*</label>
-                      <input type="text" class="form-control" id="addUser02" required>
+                      <input type="text" class="form-control" id="addUser02" name="position"required>
                     </div><br>
 
 
                     <div class="role">
                       <label for="addUser03">Role*</label>
-                      <input type="text" class="form-control" id="addUser03" required>
+                      <input type="text" class="form-control" id="addUser03" name="role" required>
                     </div><br>
 
                     <div class="region">
                       <label for="addUser04">Region*</label>
-                      <input type="text" class="form-control" id="addUser04" required>
+                      <input type="text" class="form-control" id="addUser04" name="region" required>
                     </div><br>
 
 
                     <div class="province">
                       <label for="addUser05">Province*</label>
-                      <input type="text" class="form-control" id="addUser05" required>
+                      <input type="text" class="form-control" id="addUser05"  name="province" required>
                     </div><br>
 
                     <div class="municipality">
                       <label for="addUser06">Municipality*</label>
-                      <input type="text" class="form-control" id="addUser06" required>
+                      <input type="text" class="form-control" id="addUser06" name="municipality" required>
                     </div><br>
 
 
                     <div class="division_agency">
                       <label for="addUser07">Division/Agency*</label>
-                      <input type="text" class="form-control" id="addUser07" required>
+                      <input type="text" class="form-control" id="addUser07" name="division" required>
                     </div><br>
 
                     <div class="user_email">
                       <label for="addUser08">User Email*</label>
-                      <input type="text" class="form-control" id="addUser08" required>
+                      <input type="text" class="form-control" id="addUser08" name="email" required>
                     </div><br>
 
                     <div class="password">
                       <label for="addUser09">Password*</label>
-                      <input type="text" class="form-control" id="addUser09" required>
+                      <input type="text" class="form-control" id="addUser09" name="password" required>
                     </div><br>
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Add User</button>
+                      <button type="submit" class="btn btn-primary" name="submit">Add User</button>
                     </div><br>
                 </form>
               </div>
@@ -200,7 +242,12 @@ include ('includes/config.php');
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
 
+      
+
       <div class="table_section">
+
+      <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+
         <table class="table_content">
           <thead>
 
@@ -224,73 +271,44 @@ include ('includes/config.php');
               <th width="150px">DIVISION/AGENCY</th>
               <th width="200px">ACTION</th>
             </tr>
-
           </thead>
           <tbody>
+
+        <?php
+
+        $cnt=1;
+
+        $ret=mysqli_query($conn,"SELECT * from users");
+        
+
+              while ($row=mysqli_fetch_array($ret)) {
+                ?>
+
             <tr>
-              <td>1245678</td>
+              <td><?php echo $cnt;?></td>
               <td><img src="profile.png" width=50 height=50 alt=""></td>
-              <td>Maria Anne Marie Gutierez</td>
-              <td>juandelacruz@gmail.com</td>
-              <td>ITO III</td>
-              <td>Staff</td>
-              <td>Region IV-A</td>
-              <td>Batangas</td>
-              <td>TOD</td>
+              <td><?php  echo $row['fullName'];?></td>
+              <td><?php  echo $row['username'];?></td>
+              <td><?php  echo $row['position'];?></td>
+              <td><?php  echo $row['role'];?></td>
+              <td><?php  echo $row['region'];?></td>
+              <td><?php  echo $row['province'];?></td>
+              <td><?php  echo $row['division'];?></td>
               <td>
                 <button class="view"><i class="fa fa-eye"></i></button>
                 <button class="edit"><i class="fa fa-edit"></i></button>
                 <button class="delete"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
-             <tr>
-              <td>1245678</td>
-              <td><img src="" width=50 height=50 alt=""></td>
-              <td>Juan Dela Cruz</td>
-              <td>juandelacruz@gmail.com</td>
-              <td>ITO III</td>
-              <td>Staff</td>
-              <td>Region IV-A</td>
-              <td>Batangas</td>
-              <td>TOD</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
-             <tr>
-              <td>1245678</td>
-              <td><img src="" width=50 height=50 alt=""></td>
-              <td>Juan Dela Cruz</td>
-              <td>juandelacruz@gmail.com</td>
-              <td>ITO III</td>
-              <td>Staff</td>
-              <td>Region IV-A</td>
-              <td>Batangas</td>
-              <td>TOD</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
-             <tr>
-              <td>1245678</td>
-              <td><img src="" width=50 height=50 alt=""></td>
-              <td>Juan Dela Cruz</td>
-              <td>juandelacruz@gmail.com</td>
-              <td>ITO III</td>
-              <td>Staff</td>
-              <td>Region IV-A</td>
-              <td>Batangas</td>
-              <td>TOD</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
+                
+      <?php 
+
+      $cnt=$cnt+1;
+
+
+      }?>
+
+               
           </tbody>
         </table>
       </div>
@@ -336,6 +354,13 @@ sidebarBtn.onclick = function() {
 <!-- Bootstrap Popper with Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
