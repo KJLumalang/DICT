@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
     if($query){
 
       $alertStyle ="alert alert-success";
-      $statusMsg="Student Added Successfully!";
+      $statusMsg="User Added Successfully!";
 
     }
     else{
@@ -77,7 +77,7 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="User.html" class="active">
+          <a href="user.php" class="active">
             <i class='bx bxs-group'></i>
             <span class="links_name">Users</span>
           </a>
@@ -285,7 +285,7 @@ if(isset($_POST['submit'])){
                 ?>
 
             <tr>
-              <td><?php echo $cnt;?></td>
+              <td><?php echo $row['id'];?></td>
               <td><img src="profile.png" width=50 height=50 alt=""></td>
               <td><?php  echo $row['fullName'];?></td>
               <td><?php  echo $row['username'];?></td>
@@ -295,8 +295,8 @@ if(isset($_POST['submit'])){
               <td><?php  echo $row['province'];?></td>
               <td><?php  echo $row['division'];?></td>
               <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
+               <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="view"><i class="fa fa-eye"></i></button></a>
+               <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="edit"><i class="fa fa-edit"></i></button></a>
                 <button class="delete"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
