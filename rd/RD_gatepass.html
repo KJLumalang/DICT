@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
  
     <link rel="stylesheet" href="RD_style.css">
-    <title>RD-Travel Request </title>
+    <title>RD-Gatepass Request </title>
   
     
 
@@ -23,13 +23,13 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="RD_travel.html" class="active">
+          <a href="index.html">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="RD_gatepass.html">
+          <a href="RD_gatepass.html" class="active">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
@@ -84,29 +84,26 @@
   
     <div class="home-content">
       <div class="table">
-          
-    <!--List of Travel Request that will be checked by the approver-->
-      	<div class="table_ctnt">
-
+       <!--List of Gatepass Request that will be checked by the approver-->
+        <div class="table_ctnt">
+        
         <div class="twelve">
-          <h4>List of Travel Request</h4>
+          <h4>List of Gate Pass Request</h4>
         </div>
 
       <div class="search">
           <input class="search-box" placeholder="search">
           <button class="search_here"><i class='bx bx-search'></i></button>
-      </div><br>
+      </div>
 
       <div class="table_section">
         <table class="table_req">
           
           <tbody>
-          
           <tr>
             <td data-label="DATE REQUESTED">02-07-2023</td>
-             <td data-label="TRAVEL ORDER NUMBER">2023-07-003</td>
-            <td data-label="CONTROL NUMBER">2023-07-0011</td>
-            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="Travel Order_Juan Dela Cruz_02-07-2023.pdf">Travel Order_Juan Dela Cruz_02-07-2023.pdf</a></td>
+            <td data-label="CONTROL NUMBER">23-07-0005</td>
+            <td data-label="GATE PASS REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="Gatepass_Juan Dela Cruz_02-07-2023.pdf">Gatepass_Juan Dela Cruz_02-07-2023.pdf</a></td>
             <td height="80px" data-label="SIGNED/APPROVED REQUEST">
               <input class="upload_btn" type="file" id="upload-file" name="filename">
               <button for= "upload-file" class="upload_btn" id="uploading" value="Upload">
@@ -122,12 +119,10 @@
             </td>
           </tr>
         </tbody>
-        </table>
+      </table>
       </div>
       </div>
-    </div>
-    </div>
-
+      </div>
       
     </div>
 
@@ -177,12 +172,12 @@ sidebarBtn.onclick = function() {
 </script>
 
 <script>
-	var loadFile = function (event) {
+  var loadFile = function (event) {
   var image = document.getElementById("output");
   image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-	</script>
+  </script>
 
 
 <!-- Bootstrap Popper with Bundle -->
