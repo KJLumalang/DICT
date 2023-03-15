@@ -68,19 +68,19 @@ if(isset($_POST['submit'])){
 <!-- sidebar menu -->
       <ul class="nav-links">
         <li>
-          <a href="index.html">
+          <a href="index.php">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="User.html" class="active">
+          <a href="User.php" class="active">
             <i class='bx bxs-group'></i>
             <span class="links_name">Users</span>
           </a>
         </li>
         <li>
-          <a href="tra_request.html">
+          <a href="tra_request.php">
             <i class='bx bx-clipboard' ></i>
             <span class="links_name">Request Records</span>
           </a>
@@ -226,11 +226,11 @@ if(isset($_POST['submit'])){
     <div class="home-content">
       <div class="table">
           <div class="btn">
-              <a href="user.html">Staff</a> >
-              <a href="RO_Account.html">Record Officer</a> >
-              <a href="TOD_Account.html">Head TOD</a> >
-              <a href="RD_Account.html">Regional Director</a> >
-              <a href="admin_Account.html" class="act">Admin</a>
+              <a href="user.php">Staff</a> >
+              <a href="RO_Account.php">Record Officer</a> >
+              <a href="TOD_Account.php">Head TOD</a> >
+              <a href="RD_Account.php">Regional Director</a> >
+              <a href="admin_Account.php" class="act">Admin</a>
           </div>
         <div class="table_ctnt">
         
