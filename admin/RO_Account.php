@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
 
 
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -229,8 +229,8 @@ if(isset($_POST['submit'])){
     <div class="home-content">
       <div class="table">
           <div class="btn">
-              <a href="user.php" class="act">Staff</a> >
-              <a href="RO_Account.php">Record Officer</a> >
+              <a href="user.php">Staff</a> >
+              <a href="RO_Account.php" class="act">Record Officer</a> >
               <a href="TOD_Account.php">Head TOD</a> >
               <a href="RD_Account.php">Regional Director</a> >
               <a href="admin_Account.php">Admin</a>
@@ -241,8 +241,6 @@ if(isset($_POST['submit'])){
           <input class="search-box" placeholder="search">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
-
-      
 
       <div class="table_section">
 
@@ -273,12 +271,11 @@ if(isset($_POST['submit'])){
             </tr>
           </thead>
           <tbody>
-
-        <?php
+             <?php
 
         $cnt=1;
 
-        $ret=mysqli_query($conn,"SELECT * from users where userType = 'staff' ");
+        $ret=mysqli_query($conn,"SELECT * from users where userType = 'recordOfficer' ");
         
 
               while ($row=mysqli_fetch_array($ret)) {
@@ -308,7 +305,6 @@ if(isset($_POST['submit'])){
 
       }?>
 
-               
           </tbody>
         </table>
       </div>
@@ -354,13 +350,6 @@ sidebarBtn.onclick = function() {
 <!-- Bootstrap Popper with Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
 </body>
 </html>

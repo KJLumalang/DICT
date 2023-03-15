@@ -29,7 +29,7 @@ if(isset($_GET['editId'])){
     
     
     
-        $ret=mysqli_query($conn,"update users set fullName='$fullname',username='$username',password='$password',sex='$sex',age='$age',position='$position',userType='$role',region='$region',province='$province',municipality='$municipality',division='$division' where id='$_SESSION[editId]'");
+        $ret=mysqli_query($conn,"update users set fullName='$fullname',username='$email',password='$password',sex='$sex',age='$age',position='$position',userType='$role',region='$region',province='$province',municipality='$municipality',division='$division' where id='$_SESSION[editId]'");
         
         if($ret){
 

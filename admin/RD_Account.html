@@ -1,5 +1,46 @@
-<!DOCTYPE html>
+<?php 
+session_start(); 
+error_reporting(0);
+include ('../includes/config.php');
 
+// Retrieve user input from registration form
+if(isset($_POST['submit'])){
+
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sex = $_POST['sex'];
+    $age = $_POST['age'];
+    $position = $_POST['position'];
+    $role = $_POST['role'];
+    $region = $_POST['region'];
+    $province = $_POST['province'];
+    $municipality = $_POST['municipality'];
+    $division = $_POST['division'];
+
+
+
+    $query=mysqli_query($conn,"insert into users(fullName,username,password,sex,age,position,userType,region,province,municipality,division) value('$fullname','$email','$password','$sex','$age','$position','$role','$region','$province','$municipality','$division')");
+    
+    if($query){
+
+      $alertStyle ="alert alert-success";
+      $statusMsg="User Added Successfully!";
+
+    }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
+
+    }
+}
+ 
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
