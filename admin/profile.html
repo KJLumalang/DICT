@@ -15,8 +15,8 @@
             <!-- sidebar menu -->
  <div class="sidebar">
     <div class="logo-details">
-      <img src="profile.png" alt="">
-      <span class="logo_name">Admin</span>
+      <img src="logo.png" alt="">
+      <span class="logo_name">DICT</span>
     </div>
       <ul class="nav-links">
         <li>
@@ -29,6 +29,12 @@
           <a href="user.html">
             <i class='bx bxs-group' ></i>
             <span class="links_name">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="role.html">
+            <i class='fa fa-star'></i>
+            <span class="links_name">Role</span>
           </a>
         </li>
         <li>
@@ -105,32 +111,61 @@
                       </div>
                     </div>
 
-                    <div class="user_name">
-                      <label for="Edit01">Username*</label>
+                    <div class="full_name">
+                      <label for="Edit01">FullName*</label>
                       <input type="text" class="form-control" id="Edit01" required>
                     </div><br>
 
-                    <div class="first_name">
-                      <label for="Editr02">First Name*</label>
-                      <input type="text" class="form-control" id="Edit02" required>
+                    <div class="sex">
+                      <label for="sex">Sex*</label><br>
+                      <input type="radio" id="male" name="sex" value="Male">
+                      <label for="male">Male</label><br>
+                      <input type="radio" id="css" name="sex" value="Female">
+                      <label for="female">Female</label>
+                    </div><br>
+
+                    <div class="age">
+                      <label for="age">Age*</label>
+                      <input type="text" class="form-control" id="age" required >
+                    </div><br>
+
+                    <div class="user_email">
+                      <label for="Editr02">User Email*</label>
+                      <input type="email" class="form-control" id="Edit02" required>
                     </div><br>
 
 
-                    <div class="last_name">
-                      <label for="Edit03">Last Name*</label>
+                    <div class="position">
+                      <label for="Edit03">Position*</label>
                       <input type="text" class="form-control" id="Edit03" required>
                     </div><br>
 
 
-                    <div class="email">
-                      <label for="Edit04">Email*</label>
+                    <div class="role">
+                      <label for="Edit04">Role*</label>
                       <input type="text" class="form-control" id="Edit04" required>
                     </div><br>
 
-                    <div class="role">
-                      <label for="Editr05">Role*</label>
+                    <div class="region">
+                      <label for="Editr05">Region*</label>
                       <input type="text" class="form-control" id="Edit05" required>
                     </div><br>
+
+                    <div class="province">
+                      <label for="Editr06">Province*</label>
+                      <input type="text" class="form-control" id="Edit06" required>
+                    </div><br>
+
+                    <div class="municipality">
+                      <label for="Editr07">Municipality*</label>
+                      <input type="text" class="form-control" id="Edit07" required>
+                    </div><br>
+
+                    <div class="division">
+                      <label for="Editr08">Division/Agency*</label>
+                      <input type="text" class="form-control" id="Edit08" required>
+                    </div><br>
+
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -166,25 +201,45 @@
 		     <!--Admin Account Details-->
       				<div class="info_data">
       					<div class="data">
-      						<h6> Username</h6>
-      						<p>Admin</p>
-      					</div>
-      					<div class="data">
-      						<h6> First Name</h6>
-      						<p>Juan Carlo</p>
-      					</div>
-      					<div class="data">
-      						<h6> Last Name</h6>
-      						<p>Delo Santos</p>
-      					</div>
-      					<div class="data">
-      						<h6>Email</h6>
-      						<p>noreply@gmail.com</p>
-      					</div>
-      					<div class="data">
-      						<h6>Role</h6>
-      						<p>Administrator</p>
-      					</div>
+                  <h6> Fullname</h6>
+                  <p>Maria Anne Marie Gutierez</p>
+                </div>
+                <div class="data">
+                  <h6> User Email</h6>
+                  <p>maria@gmail.com</p>
+                </div>
+                <div class="data">
+                  <h6> Sex</h6>
+                  <p>Female</p>
+                </div>
+                <div class="data">
+                  <h6> Age</h6>
+                  <p>25</p>
+                </div>
+                <div class="data">
+                  <h6> Position</h6>
+                  <p>ITO III</p>
+                </div>
+                <div class="data">
+                  <h6>Role</h6>
+                  <p>Staff</p>
+                </div>
+                <div class="data">
+                  <h6>Region</h6>
+                  <p>Region IV-A</p>
+                </div>
+                <div class="data">
+                  <h6>Province</h6>
+                  <p>Batangas</p>
+                </div>
+                <div class="data">
+                  <h6>Municipality</h6>
+                  <p>Batangas City</p>
+                </div>
+                <div class="data">
+                  <h6>Division/Agency</h6>
+                  <p>TOD</p>
+                </div>
       				</div>
       			</div>
       		</div>

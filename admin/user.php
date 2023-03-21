@@ -64,8 +64,8 @@ if(isset($_POST['submit'])){
     <!--Header-->
   <div class="sidebar">
     <div class="logo-details">
-      <img src="profile.png" alt="">
-      <span class="logo_name">Admin</span>
+      <img src="logo.png" alt="">
+      <span class="logo_name">DICT</span>
     </div>
 
 <!-- sidebar menu -->
@@ -83,6 +83,12 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
+          <a href="role.html">
+            <i class='fa fa-star'></i>
+            <span class="links_name">Role</span>
+          </a>
+        </li>
+        <li>
           <a href="tra_request.html">
             <i class='bx bx-clipboard' ></i>
             <span class="links_name">Request Records</span>
@@ -96,6 +102,7 @@ if(isset($_POST['submit'])){
         </li>
       </ul>
   </div>
+
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
@@ -174,7 +181,7 @@ if(isset($_POST['submit'])){
 
                     <div class="position">
                       <label for="addUser02">Position*</label>
-                      <input type="text" class="form-control" id="addUser02" name="position"required>
+                      <input type="text" class="form-control" id="addUser02" name="position" required>
                     </div><br>
 
 
@@ -228,21 +235,12 @@ if(isset($_POST['submit'])){
   
     <div class="home-content">
       <div class="table">
-          <div class="btn">
-              <a href="user.php" class="act">Staff</a> >
-              <a href="RO_Account.php">Record Officer</a> >
-              <a href="TOD_Account.php">Head TOD</a> >
-              <a href="RD_Account.php">Regional Director</a> >
-              <a href="admin_Account.php">Admin</a>
-          </div>
       	<div class="table_ctnt">
         
       <div class="search">
           <input class="search-box" placeholder="search">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
-
-      
 
       <div class="table_section">
 

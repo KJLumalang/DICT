@@ -65,8 +65,8 @@ if(isset($_GET['editId'])){
             <!-- sidebar menu -->
  <div class="sidebar">
     <div class="logo-details">
-      <img src="profile.png" alt="">
-      <span class="logo_name">Admin</span>
+      <img src="logo.png" alt="">
+      <span class="logo_name">DICT</span>
     </div>
       <ul class="nav-links">
         <li>
@@ -79,6 +79,12 @@ if(isset($_GET['editId'])){
           <a href="user.php">
             <i class='bx bxs-group' ></i>
             <span class="links_name">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="role.html">
+            <i class='fa fa-star'></i>
+            <span class="links_name">Role</span>
           </a>
         </li>
         <li>
