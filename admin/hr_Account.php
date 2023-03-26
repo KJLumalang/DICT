@@ -226,10 +226,10 @@ if(isset($_POST['submit'])){
     <div class="home-content">
       <div class="table">
           <div class="btn">
-              <a href="user.php">Staff</a> >
-              <a href="hr_Account.php">HR/AFD</a>
+          <a href="user.php" >Staff</a> >
+              <a href="hr_Account.php" class="act">HR/AFD</a>
               <a href="RO_Account.php">Record Officer</a> >
-              <a href="TOD_Account.php" class="act">Head TOD</a> >
+              <a href="TOD_Account.php">Head TOD</a> >
               <a href="RD_Account.php">Regional Director</a> >
               <a href="admin_Account.php">Admin</a>
           </div>
@@ -271,7 +271,7 @@ if(isset($_POST['submit'])){
 
         $cnt=1;
 
-        $ret=mysqli_query($conn,"SELECT * from users where userType = 'tod' ");
+        $ret=mysqli_query($conn,"SELECT * from users where userType = 'hr' OR userType = 'afd' ");
         
 
               while ($row=mysqli_fetch_array($ret)) {

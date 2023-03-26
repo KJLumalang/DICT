@@ -232,7 +232,8 @@ if(isset($_POST['submit'])){
     <div class="home-content">
       <div class="table">
           <div class="btn">
-              <a href="user.php">Staff</a> >
+              <a href="user.php">Staff</a>
+              <a href="hr_Account.php">HR/AFD</a>
               <a href="RO_Account.php">Record Officer</a> >
               <a href="TOD_Account.php">Head TOD</a> >
               <a href="RD_Account.php">Regional Director</a> >
