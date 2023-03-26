@@ -32,32 +32,32 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             if ($row['username'] === $uname && $row['password'] === $pass) {
 
 
-				if($row['userType']=='admin'){
+				if($row['userType']=='Admin'){
 					header("Location: admin/index.html");
 					exit();
 				}
 				
-				elseif($row['userType']=='regionalDirector'){
+				elseif($row['userType']=='Regional Director'){
 					header("Location: ro/index.html");
 					exit();
 				}
 
-				elseif($row['userType']=='tod'){
+				elseif($row['userType']=='TOD'){
 					header("Location: tod/index.html");
 					exit();
 				}
 
-				elseif($row['userType']=='hr'){
+				elseif($row['userType']=='HR'){
 					header("Location: hr/index.html");
 					exit();
 				}
 
-				elseif($row['userType']=='afd'){
+				elseif($row['userType']=='AFD'){
 					header("Location: hr/index.html");
 					exit();
 				}
 
-				elseif($row['userType']=='recordOfficer'){
+				elseif($row['userType']=='Record Officer'){
 					header("Location: ro/index.html");
 					exit();
 				}

@@ -1,3 +1,33 @@
+<?php 
+session_start(); 
+error_reporting(0);
+include ('../includes/config.php');
+
+if(isset($_POST['submit'])){
+
+    $role = $_POST['role'];
+  
+
+    $query=mysqli_query($conn,"insert into roles (roleName) value('$role')");
+    
+    if($query){
+
+      $alertStyle ="alert alert-success";
+      $statusMsg="User Added Successfully!";
+
+    }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
+
+    }
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -34,19 +64,19 @@
           </a>
         </li>
         <li>
-          <a href="user.html">
+          <a href="user.php">
             <i class='bx bxs-group'></i>
             <span class="links_name">Users</span>
           </a>
         </li>
         <li>
-          <a href="role.html" class="active">
+          <a href="role.php" class="active">
             <i class='fa fa-star'></i>
             <span class="links_name">Role</span>
           </a>
         </li>
         <li>
-          <a href="tra_request.html">
+          <a href="tra_request.php">
             <i class='bx bx-clipboard' ></i>
             <span class="links_name">Request Records</span>
           </a>
@@ -79,17 +109,17 @@
           </div>
           <hr>
 
-            <a href="profile.html" class="sub-menu-link">
+            <a href="profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass.html" class="sub-menu-link">
+            <a href="changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="login.html" class="sub-menu-link">
+            <a href="../index.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -110,21 +140,15 @@
               <div class="modal-body">
 
                 <!-- Form to be fill-out to add New role -->
-                <form>
-
+                <form method="POST">
                     <div class="role_name">
                       <label for="role_name">Role Name*</label>
-                      <input type="text" class="form-control" id="role" required >
-                    </div><br>
-
-                    <div class="description">
-                      <label for="description">Description*</label>
-                      <textarea class="form-control" id="description" required></textarea>
+                      <input type="text" class="form-control" id="role" name="role" required >
                     </div><br>
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-primary" name="submit">Add</button>
                     </div><br>
                 </form>
               </div>
@@ -132,49 +156,17 @@
           </div>
         </div>
 
-      <!-- Edit Role Modal -->
-        <div class="modal fade" id="EditRoleModal" tabindex="-1" aria-labelledby="EditRoleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="EditRoleModalLabel">Edit Role</h5> 
-              </div>
-              <div class="modal-body">
-
-                <!-- Form to be fill-out to Edit Role -->
-                <form>
-
-                    <div class="role_name">
-                      <label for="role_name">Role Name*</label>
-                      <input type="text" class="form-control" id="role" required >
-                    </div><br>
-
-                    <div class="description">
-                      <label for="description">Description*</label>
-                      <textarea class="form-control" id="description" required></textarea>
-                    </div><br>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save</button>
-                    </div><br>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+    
 
   
     <div class="home-content">
       <div class="table">
       	<div class="table_ctnt">
         
-      <div class="search">
-          <input class="search-box" placeholder="search">
-          <button class="search_here"><i class='bx bx-search'></i></button>
-      </div>
 
       <div class="table_section">
+      <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+
         <table class="table_content">
           <thead>
 
@@ -188,22 +180,28 @@
             <!-- Table for list of roles -->
             <tr>
               <th width="200px">NO.</th>
-              <th width="300px">NAME</th>
-              <th width="400px">DESCRIPTION</th>
+              <th width="300px">ROLE</th>
               <th width="200px">ACTION</th>
             </tr>
 
           </thead>
           <tbody>
+
+            <?php
+            $ret=mysqli_query($conn,"SELECT * from roles");
+            while ($row=mysqli_fetch_array($ret)) {
+              ?>
             <tr>
-              <td>1</td>
-              <td>Admin</td>
-              <td>Administrator</td>
+              <td><?php echo $row['id'];?></td>
+              <td><?php  echo $row['roleName'];?></td>
               <td>
-                <button class="edit" data-toggle="modal" data-target="#EditRoleModal"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
+              <a href="deleteRole.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-trash"></i></button></a>
               </td>
             </tr> 
+            <?php 
+  
+            }?>
+
           </tbody>
         </table>
       </div>

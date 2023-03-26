@@ -40,10 +40,6 @@ if(isset($_POST['submit'])){
 ?>
 
 
-
-
-
-
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
@@ -83,7 +79,7 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="role.html">
+          <a href="role.php">
             <i class='fa fa-star'></i>
             <span class="links_name">Role</span>
           </a>
@@ -187,7 +183,20 @@ if(isset($_POST['submit'])){
 
                     <div class="role">
                       <label for="addUser03">Role*</label>
-                      <input type="text" class="form-control" id="addUser03" name="role" required>
+                      <?php 
+                         echo '<select class="form-control" name="role" required>';
+                         echo'<option value="">Please select role</option>';      
+                         $query=mysqli_query($conn,"select roleName from roles");                                                                                                   
+                         $count = mysqli_num_rows($query);                   
+                          if($count > 0){                                          
+                          while ($row = mysqli_fetch_array($query)) {
+                          echo'<option value="'.$row['roleName'].'" >'.$row['roleName'].'</option>';
+                            }
+                              }
+                           echo '</select>';
+                            ?>            
+
+                    
                     </div><br>
 
                     <div class="region">
@@ -276,7 +285,7 @@ if(isset($_POST['submit'])){
 
         $cnt=1;
 
-        $ret=mysqli_query($conn,"SELECT * from users where userType = 'staff' ");
+        $ret=mysqli_query($conn,"SELECT * from users");
         
 
               while ($row=mysqli_fetch_array($ret)) {
