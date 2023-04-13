@@ -4,6 +4,9 @@ error_reporting();
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 
+$query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
+$rowi = mysqli_fetch_array($query);   
+
 $result=mysqli_query($conn,"SELECT * from travelorder where reqStatus2 = 'Pending' ");
 $travelnum = mysqli_num_rows($result);
 
@@ -12,14 +15,15 @@ $gatepassnum = mysqli_num_rows($result);
 
 ?>
 
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="style.css">
-    <title>Admin-Dashboard</title>
+    <link rel="stylesheet" href="style_RO.css">
+    <title>Record Officer-Dashboard</title>
   
      <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,33 +35,23 @@ $gatepassnum = mysqli_num_rows($result);
   <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name">Admin</span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
+
       <ul class="nav-links">
         <li>
-          <a href="index.html" class="active">
+          <a href="index.php" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="user.php">
-            <i class='bx bxs-group' ></i>
-            <span class="links_name">Users</span>
-          </a>
-        </li>
-        <li>
-          <a href="role.php">
-            <i class='fa fa-star'></i>
-            <span class="links_name">Role</span>
-          </a>
-        </li>
-        <li>
-          <a href="tra_request.html">
+          <a href="RO_travel_request.php">
             <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Request Records</span>
+            <span class="links_name">Record Request</span>
           </a>
         </li>
+      
         <li class="log_out">
           <a href="../index.php">
             <i class='bx bx-log-out'></i>
@@ -75,23 +69,23 @@ $gatepassnum = mysqli_num_rows($result);
       </div>
       <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Administrator </span>
+        <span class="admin_name" onclick="toggleMenu()">Records Officer </span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5>Administrator</h5>
+            <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
 
-            <a href="profile.html" class="sub-menu-link">
+            <a href="profile_RO.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass.html" class="sub-menu-link">
+            <a href="changepass_RO.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>

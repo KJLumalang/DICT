@@ -2,6 +2,7 @@
 
 session_start();
 session_destroy();
-header("Location:log.php");
+unset($_SESSION['uname']);
+header("Location: ../index.php");
 exit();
 ?>

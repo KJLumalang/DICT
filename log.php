@@ -31,39 +31,41 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
             if ($row['username'] === $uname && $row['password'] === $pass) {
 
+				$_SESSION['uname'] = $uname;
+				$_SESSION['id'] = $row['id'];
 
 				if($row['userType']=='Admin'){
-					header("Location: admin/index.html");
+					header("Location: admin/index.php");
 					exit();
 				}
 				
 				elseif($row['userType']=='Regional Director'){
-					header("Location: ro/index.html");
+					header("Location: rd/index.php");
 					exit();
 				}
 
 				elseif($row['userType']=='TOD'){
-					header("Location: tod/index.html");
+					header("Location: tod/index.php");
 					exit();
 				}
 
 				elseif($row['userType']=='HR'){
-					header("Location: hr/index.html");
+					header("Location: hr/index.php");
 					exit();
 				}
 
 				elseif($row['userType']=='AFD'){
-					header("Location: hr/index.html");
+					header("Location: hr/index.php");
 					exit();
 				}
 
 				elseif($row['userType']=='Record Officer'){
-					header("Location: ro/index.html");
+					header("Location: ro/index.php");
 					exit();
 				}
 			
 				else{
-					header("Location: staff/index.html");
+					header("Location: staff/index.php");
 					exit();
 				}
 

@@ -1,3 +1,22 @@
+<?php
+// Starting the session, to use and
+// store data in session variable
+session_start();
+include ('../includes/config.php');
+include ('../includes/login_check.php');
+
+  
+
+
+
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
+$result=mysqli_fetch_array($query);
+
+
+?>
+
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -47,7 +66,7 @@
           </a>
         </li>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="login.html">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -88,8 +107,8 @@
               <th>TRAVEL ORDER NO.</th>
               <th>CTRL NO.</th>
               <th>DESTINATION</th>
-              <th>INCLUSIVE DATE</th>
-              <th>END DATE</th>
+              <th>INCLUSIVE DATE OF TRAVEL</th>
+              <th>END DATE OF TRAVEL</th>
               <th>PURPOSE</th>
               <th>DTE</th>
               <th>APPROPRIATION/FUND</th>
@@ -106,7 +125,7 @@
               <td></td>
               <td>Mount Malayarat golf & Country Club</td>
               <td>01-12-2023</td>
-              <td>01-18-2023</td>
+              <td>01-20-2023</td>
               <td>Committees for Ceremonial</td>
               <td>N/A</td>
               <td>Project Funds</td>
@@ -123,7 +142,7 @@
               <td></td>
               <td>Mount Malayarat golf & Country Club</td>
               <td>01-12-2023</td>
-              <td>01-18-2023</td>
+              <td>01-20-2023</td>
               <td>Committees for Ceremonial</td>
               <td>N/A</td>
               <td>Project Funds</td>
@@ -140,7 +159,7 @@
               <td></td>
               <td>Mount Malayarat golf & Country Club</td>
               <td>01-12-2023</td>
-              <td>01-18-2023</td>
+              <td>01-20-2023</td>
               <td>Committees for Ceremonial</td>
               <td>N/A</td>
               <td>Project Funds</td>

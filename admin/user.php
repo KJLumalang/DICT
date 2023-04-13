@@ -2,6 +2,7 @@
 session_start(); 
 error_reporting(0);
 include ('../includes/config.php');
+include ('../includes/login_check.php');
 
 // Retrieve user input from registration form
 if(isset($_POST['submit'])){
@@ -67,7 +68,7 @@ if(isset($_POST['submit'])){
 <!-- sidebar menu -->
       <ul class="nav-links">
         <li>
-          <a href="index.html">
+          <a href="index.php">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -85,13 +86,13 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="tra_request.html">
+          <a href="tra_request.php">
             <i class='bx bx-clipboard' ></i>
             <span class="links_name">Request Records</span>
           </a>
         </li>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -118,17 +119,17 @@ if(isset($_POST['submit'])){
           </div>
           <hr>
 
-            <a href="profile.html" class="sub-menu-link">
+            <a href="profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass.html" class="sub-menu-link">
+            <a href="changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>

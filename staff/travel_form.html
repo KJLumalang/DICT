@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="login.html">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -66,166 +66,195 @@
 
   
     <div class="home-content">
-      
       <div class="container">
   
         <header>Travel Order Form</header>
         
-        <form action="#">
+        <form method="POST">
     
             <div class="form first">
                 <div class="details personal">
+                  <span class="title">Local Travel Order</span>
+
 
 <!--START OF FIELD 1-->
                     <div class="fields">
+
+                      <div class="input-field1">
+                         <span>Traveler's Info</span>
+                      </div>
+
+                      <div class="input-field1">
+                       <button style=" width:40px; height:40px;" type="button" class="btn btn-success btn-sm" onclick="addEntry();"><i class="bx bx-plus"></i></button>
+                      </div>
+
+                      <div class="input-field1">
+                      <div id="children">
+                        <div class="form-group">
+                          <input type="text" name="tavelers[]" placeholder="Name/Position/Division" class="form-control" required="required"/>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+<!--JS for Adding Multiple name input -->
+<script>
+function addEntry(){
+  var entry="<input type='text' name='tavelers[]' placeholder='Name/Position/Division' class='form-control'/>";
+  var element=document.createElement("div");
+  element.setAttribute('class', 'form-group');
+  element.innerHTML=entry;
+  document.getElementById('tavelers').appendChild(element);
+}
+</script>
+        
+              <div class="DTE">
+                  <div class="line"></div>
+
+                  <div class="fields">
                         <div class="input-field1">
                             <label>Control Number</label>
                             <input type="text" placeholder="Control Number" required>
                         </div>
-
-                        <div class="input-field1">
-                            <label>Full Name</label>
-                            <input type="text" placeholder="Enter your name" required>
-                        </div>
-
                         <div class="input-field1">
                             <label>Destination</label>
-                            <input type="text" placeholder="Enter your destinatoin" required>
-                        </div>
-
-                        <div class="input-field1">
-                            <label>Position</label>
-                            <input type="text" placeholder="Enter your position" required>
+                            <input type="text" placeholder="Enter your destination" required>
                         </div>
 
                         <div class="input-field1">
                             <label>Inclusive Date/s of travel</label>
                             <input type="date" required>
                         </div>
-
-                      <div class="input-field1">
-                            <label>Division/Agency</label>
-                            <input type="text" placeholder="Enter agency you belong" required>
-                        </div>
-                      
-                      <div class="input-field1">
+                        <div class="input-field1">
                             <label>End Date of travel</label>
                             <input type="date" required>
-                      </div>
-
+                        </div>
+            
                       <div class="input-field1">
                             <label>Purpose/s of Travel</label>
                             <input type="text" placeholder="Enter purpose" required>
                         </div>
-
-                    </div>
-                  </div>
-        
-        
+                </div>
+              </div>
 
 <!--START OF FIELD 2-->
               <div class="DTE">
                   <div class="line"></div>
-                      <span class="title">Daily Travel Expenses (DTE) to be incured: Fund to which travel expenses would be charged to:</span>
+                      <span class="title">Daily Travel Expenses (DTE) to be incured:</span>
 
                   <div class="fields">
           
-                        <div class="input-field2">  
-                             <label></label>
-                        </div>
-              
-                        <div class="input-field2">
-                            <label for="genfund" >General Fund</label>
-                        </div>
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Actual
+                          </label>
+                      </div>
 
-                        <div class="input-field2">
-                            <label for="projfund">Project Funds</label>       
-                        </div>
-                          
-<!--OTHER GUI-->                    
-                    <div class="input-field2">
-                        <label>Others</label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label>
-                          <input type="checkbox"> Actual
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label for="genfund">
-                          <input type="radio"  id="genfund" value="general funds" name="actual"> 
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label for="projfund">
-                          <input type="radio"  id="projfund" value="project funds" name="actual">
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label>
-                          <input type="radio"  id="other" value="others" name="actual">
-                        </label>
-                    </div>
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
 
-                    <div class="input-field2">
-                        <label>
-                          <input type="checkbox"> Per Diem
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label for="genfund">
-                          <input type="radio"  id="genfund" value="general funds" name="per_diem"> 
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label for="projfund">
-                          <input type="radio"  id="projfund" value="project funds" name="per_diem">
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label>
-                          <input type="radio"  id="other" value="others" name="per_diem">
-                        </label>
-                    </div>
-
-                    <div class="input-field2">
-                        <label>
-                          <input type="checkbox"> Transportation
-                        </label>
-                    </div>
-                 
-                    <div class="input-field2">
-                        <label for="genfund">
-                          <input type="radio" id="genfund" value="general funds" name="transpo"> 
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label for="projfund">
-                          <input type="radio"  id="projfund" value="project funds" name="transpo">
-                        </label>
-                    </div>
-              
-                    <div class="input-field2">
-                        <label>
-                          <input type="radio"  id="other" value="others" name="transpo">
-                        </label>
-                    </div>
-              
-                    <div class="input-field1">
-                        <label>
-                          <input type="checkbox"> Others
-                          <input type="text"  class="oth" placeholder="Enter other funds" required>
-                        </label>
-                    </div> 
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Per Diem
+                          </label>
+                      </div>
             
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="eg. meal, incidental expences" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Transportation
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="eg. official vehicle, public conveyance" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Others
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="Please Specify" required>
+                      </div>
+                </div>
+              </div>
+
+                <div class="DTE">
+                  <div class="line"></div>
+                      <span class="title">Fund to which travel expenses would be charged to:</span>
+
+                  <div class="fields">
+          
+                       <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          General Fund (GAA)
+                          </label>
+                      </div>
+
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Project Funds
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="Please Specify" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Others
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="eg. sponsor/ requesting agency" required>
+                      </div>
+
+                </div>
+                 </div>
+
+                <div class="DTE">
+                  <div class="line"></div>
+
+                  <div class="fields">
+        
+                      <div class="input-field1">
+                          <label>
+                         Remarks/ Special Instructions:
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+
                 </div>
           
                 <div class="buttons">  
@@ -236,8 +265,7 @@
                     </button>
                 </div> 
 
-          </div> 
-          </div> 
+          </div>  
 
         </form>
         </div>
@@ -247,6 +275,8 @@
     </div>
 
   </section>
+
+
 
 <!--Sidebar-->
   <script>

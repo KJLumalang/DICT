@@ -1,0 +1,216 @@
+<?php
+// Starting the session, to use and
+// store data in session variable
+session_start();
+include ('../includes/config.php');
+include ('../includes/login_check.php');
+
+  
+
+
+
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
+$result=mysqli_fetch_array($query);
+
+
+?>
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+ 
+    <link rel="stylesheet" href="style_STAFF.css">
+    <title>Request History </title>
+    
+      <!-- Bootstrap CSS File-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+          <!-- sidebar menu -->
+ <div class="sidebar">
+    <div class="logo-details">
+      <img src="profile.png" alt="">
+      <span class="logo_name">Juan Dela Cruz</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="index.php">
+            <i class='fa fa-user-circle' ></i>
+            <span class="links_name">Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="travel_form.php">
+            <i class='fa fa-wpforms' ></i>
+            <span class="links_name">Request Travel Order</span>
+          </a>
+        </li>
+         <li>
+          <a href="gatepass_form.php">
+            <i class='bx bx-file' ></i>
+            <span class="links_name">Request Gatepass</span>
+          </a>
+        </li>
+        <li>
+          <a href="to_record.php" class="active">
+            <i class='bx bx-file-blank' ></i>
+            <span class="links_name">Request History</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="login.php">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Travel Order Requests</span>
+      </div>
+       
+    </nav>
+
+    <div class="home-content">
+      <div class="table">
+        <div class="table_ctnt">
+          
+        <!--Search box-->
+      <div class="search">
+          <input class="search-box" placeholder="search">
+          <button class="search_here"><i class='bx bx-search'></i></button>
+      </div>
+
+      <div class="table_section">
+        <table class="table_content">
+          <thead>
+            <!--Option button to choose which table to display-->
+            <div class="btn">
+              <a href="to_record.php" class="act">Travel Order</a> >
+              <a href="gp_record.php">Gatepass</a>
+            </div><br><br>
+              <!-- Table for list of travel request -->
+            <tr>
+              <th>DATE REQUESTED</th>
+              <th>TRAVEL ORDER NO.</th>
+              <th>CTRL NO.</th>
+              <th>DESTINATION</th>
+              <th>INCLUSIVE DATE OF TRAVEL</th>
+              <th>END DATE OF TRAVEL</th>
+              <th>PURPOSE</th>
+              <th>DTE</th>
+              <th>APPROPRIATION/FUND</th>
+              <th>REMARKS/ SPECIAL INSTRUCTIONS</th>
+              <th >HEAD, TOD <br>APPROVAL STATUS</th>
+              <th >REGIONAL DIRECTOR<br> APPROVAL STATUS</th>
+              <th width="100px">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+
+<?php
+
+$cnt=1;
+
+$ret=mysqli_query($conn,"SELECT * from travelorder where requestedBy = '$result[fullName]' ");
+
+
+      while ($row=mysqli_fetch_array($ret)) {
+        ?>
+
+    <tr>
+      <td><?php echo $row['dateRequested'];?></td>
+      <td><?php  echo $row['travelorderNo'];?></td>
+      <td><?php  echo $row['controlNo'];?></td>
+      <td><?php  echo $row['destination'];?></td>
+      <td><?php  echo $row['inclusiveDate'];?></td>
+      <td><?php  echo $row['endDate'];?></td>
+      <td><?php  echo $row['purpose'];?></td>
+      <td><?php  echo $row['division'];?></td>
+      <td>
+      <?php 
+      if(!empty($row['generalfund'])){
+            echo "General Fund:";
+            echo "<br>";
+            echo $row['generalfundDesc'];
+            echo "<br>";
+
+      }
+
+      if(!empty($row['projectfund'])){
+        echo "Project Fund:";
+        echo "<br>";
+        echo $row['projectfundDesc'];
+        echo "<br>";
+      }
+
+      if(!empty($row['others'])){
+        echo "Others:";
+        echo "<br>";
+        echo $row['othersDesc'];
+        echo "<br>";
+      }
+      
+      
+      ?>
+      </td>
+      <td><?php  echo $row['remarks'];?></td>
+      <td><?php  echo $row['reqStatus'];?></td>
+      <td><?php  echo $row['reqStatus'];?></td>
+      <td>
+       <a href=""><button class="view"><i class="fa fa-eye"></i></button></a>
+      </td>
+    </tr>
+        
+<?php 
+
+$cnt=$cnt+1;
+
+
+}?>
+        
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+ <!-- Admin profile Submenu-->
+<script>
+    let subMenu=document.getElementById("subMenu");
+
+    function toggleMenu(){
+      subMenu.classList.toggle("open-menu");
+    }
+</script>
+
+</body>
+</html>
+
+
+

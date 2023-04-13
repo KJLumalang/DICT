@@ -7,18 +7,53 @@ include ('../includes/login_check.php');
 $query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
 $rowi = mysqli_fetch_array($query);   
 
-if(ISSET($_POST['save'])){
+
+// Uploads files and approved
+if (isset($_POST['upload'])) { // if save button on the form is clicked
+    // name of the uploaded file
+    $filename = $_FILES['myfile']['name'];
+    $controlNo =$_POST['controlNo'];
+
+    // destination of the file on the server
+    $destination = 'uploads/' . $filename;
+
+    // get the file extension
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    // the physical file on a temporary uploads directory on the server
+    $file = $_FILES['myfile']['tmp_name'];
+    $size = $_FILES['myfile']['size'];
+
+    if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
+        echo "You file extension must be .zip, .pdf or .docx";
+    } elseif ($_FILES['myfile']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
+        echo "File too large!";
+    } else {
+        // move the uploaded (temporary) file to the specified destination
+        if (move_uploaded_file($file, $destination)) {
+
+            $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (name, size, downloads) VALUES ('$filename', $size, 0)");
+
+            if ($sql) {
+
+                echo "File uploaded successfully";
+                $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Approved' where controlNo = '$controlNo'");
 
 
-  $controlNo = $_POST['controlNo'];
-  $travelorderNo = $_POST['dataid'];
-  
-
-  $update = mysqli_query($conn, "UPDATE travelorder SET controlNo = '$controlNo' where travelorderNo = '$travelorderNo' ");
-
-
+            }
+        } else {
+            echo "Failed to upload file.";
+        }
+    }
 }
 
+//if disapproved
+if (isset($_POST['disapproved'])) { 
+
+  $controlNo =$_POST['controlNo'];
+  $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Disapproved' where controlNo = '$controlNo'");
+
+}
 
 ?>
 
@@ -45,17 +80,17 @@ if(ISSET($_POST['save'])){
   <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name">Approver</span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
       <ul class="nav-links">
         <li>
-          <a href="approver_travel.html" class="active">
+          <a href="index.php" class="active">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="approver_gatepass.html">
+          <a href="approver_gatepass.php">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
@@ -82,7 +117,7 @@ if(ISSET($_POST['save'])){
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5>Approver</h5>
+            <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
 
@@ -125,28 +160,49 @@ if(ISSET($_POST['save'])){
 
       <div class="table_section">
         <table class="table_req">
-          
+
           <tbody>
-          
-          <tr>
-            <td data-label="DATE REQUESTED">02-07-2023</td>
-             <td data-label="TRAVEL ORDER NUMBER">2023-07-003</td>
-            <td data-label="CONTROL NUMBER">2023-07-0011</td>
-            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="Travel Order_Juan Dela Cruz_02-07-2023.pdf">Travel Order_Juan Dela Cruz_02-07-2023.pdf</a></td>
+
+          <!--List of Travel Request that will be checked by the approver-->
+          <?php
+
+$cnt=1;
+
+$ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Pending' and controlNo != '0'");
+
+
+      while ($row=mysqli_fetch_array($ret)) {
+        ?>
+            <form method="POST" enctype="multipart/form-data">
+            <tr>
+            <td data-label="DATE REQUESTED"><?php echo $row['dateRequested'];?></td>
+            <td data-label="TRAVEL ORDER NUMBER"><?php echo $row['travelorderNo'];?></td>
+            <td data-label="CONTROL NUMBER"><?php echo $row['controlNo'];?></td>
+            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/to.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "Travel Order#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
+  
             <td height="80px" data-label="SIGNED/APPROVED REQUEST">
-              <input class="upload_btn" type="file" id="upload-file" name="filename">
-              <button for= "upload-file" class="upload_btn" id="uploading" value="Upload">
-                <div class="loader">
-                      <i class="fa-solid fa-circle-notch icon spinner"></i>
-                      <span class="btn-text" user-selcect="none" >Upload File</span>
-                  </div>
+              <input class="upload_btn" type="file" id="upload-file" name="myfile" required>
+              <input value="<?php echo $row['controlNo'];?>" name="controlNo" type="hidden">
+
               </button>
             </td>
+
             <td data-label="ACTION">
-              <button class="action_btn" id="approve" value="Approve">Approve</button>
-              <button class="action_btn" id="disapprove" value="Disapprove">Disapprove</button>
+              <button class="action_btn" id="approve" for= "upload-file" type="submit" class="upload_btn" value="Upload" name="upload">Approve</button>
+              <button class="action_btn" id="disapprove" value="Disapproved" type="submit" name="disapproved" formnovalidate>Disapprove</button>
             </td>
           </tr>
+      </form>
+        
+<?php 
+
+$cnt=$cnt+1;
+
+
+}?>
+
+
+
         </tbody>
         </table>
       </div>

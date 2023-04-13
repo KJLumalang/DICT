@@ -27,7 +27,6 @@ if(isset($_POST['submit'])){
 
 ?>
 
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -58,7 +57,7 @@ if(isset($_POST['submit'])){
 <!-- sidebar menu -->
       <ul class="nav-links">
         <li>
-          <a href="index.html">
+          <a href="index.php">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Dashboard</span>
           </a>

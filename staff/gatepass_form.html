@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="style_STAFF.css">
     <title>Gatepass Form </title>
   
-    <!-- Bootstrap CSS File-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+   
 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -48,7 +47,7 @@
           </a>
         </li>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="login.html">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -66,14 +65,163 @@
 
   
     <div class="home-content">
-      
+    	      <div class="container">
+  
+        <header>Gate Pass Form</header>
+        
+        <form action="#">
+    
+            <div class="form first">
+                <div class="details personal">
+                  <span class="title">Official</span>
+
+<!--START OF FIELD 1-->
+                    <div class="fields">
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Travel(Please Specify)
+                          </label>
+                      </div>
+
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="Tech4aed Census/On-site Vsitation" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Seminar/Training/Conference/Meeting
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Transportation Pick-up of documents
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Others
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+                    </div>
+
+                  </div>
+        
+        
+
+<!--START OF FIELD 2-->
+              <div class="DTE">
+                  <div class="line"></div>
+                      <span class="title">Personal</span>
+
+                  <div class="fields">
+          
+                       <div class="input-field1">
+                          <label>
+                          <input type="checkbox">
+                          Medication/Physical Check-Up</label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                        
+                      </div>
+
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox">
+                          Medical Attention to Family Member/Relative</label>       
+                      </div>
+                        
+                      <div class="input-field1">
+                          <label></label>   
+                      </div>
+                      <div class="input-field1">
+                          <label>
+                          <input type="checkbox"  required>
+                          Others
+                          </label>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label></label>
+                          <input type="text" placeholder="" required>
+                      </div>
+                    </div>
+
+
+                </div>
+
+
+                  <div class="fields">
+          
+                       <div class="input-field1">
+                          <label>Date/s:</label>
+                          <input type="date" class="" placeholder="" required>
+                      </div>
+            
+                      <div class="input-field1">
+                          <label>Venue:</label>
+                          <input type="text" placeholder="" required>
+                      </div>
+            
+                      <div class="title">
+                          <label style="font-size:15px;">Start Time</label>
+                          <input type="time" placeholder="" required>
+                          <label style="font-size:15px;">to</label>
+                          <input type="time" placeholder="" required>
+                      </div>
+
+                </div>
+
+          
+               <div class="buttons">
+
+                      <input class="reset" type="reset">  
+                      <button class="submit">
+                          <span class="btnText">Submit</span>
+                      </button>
+                   
+                </div>
+
+
+          </div>  
+
+        </form>
+        </div>
+
+
+    <!--
        <div class="container">
         <header> GATEPASS FORM</header>
 
         <form action="#">
           <div class="form first">
-              <div class="details personal">
+              
                 <span class="title">Official</span>
+
 
                   <div class="fields">
                       <div class="input-field1">
@@ -155,25 +303,25 @@
                             
                       </div>
 <!--OTHER GUI-->
-            
+            <!--
                       <div class="input-field1">
                           <label>
                           <input type="checkbox">
                           Others
-                          <input type="text" class="oth" placeholder="" required>
+                          <input type="text" style="width:400px;" class="oth" placeholder="Please specify" required>
                           </label>
                       </div>
         
                   </div> 
                 </div> 
 
-                <div class="field">   
-                      <div class="title">
+                <div class="fields">   
+                      <div class="input-field1">
                           <label>Date/s:</label>
                           <input type="date" class="" placeholder="" required>
                       </div>
             
-                      <div class="title">
+                      <div class="input-field1">
                           <label>Venue:</label>
                           <input type="text" placeholder="" required>
                       </div>
@@ -200,7 +348,8 @@
         </form>
    </div>
     </div>
-
+	
+<!-->
   </section>
 
 <!--Sidebar-->
@@ -216,10 +365,6 @@ sidebarBtn.onclick = function() {
 }
  </script>
 
-
-<!-- Bootstrap Popper with Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 </body>
 </html>

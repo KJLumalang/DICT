@@ -1,3 +1,16 @@
+<?php
+// Starting the session, to use and
+// store data in session variable
+session_start();
+include ('../includes/config.php');
+include ('../includes/login_check.php');
+
+  
+
+
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -136,75 +149,66 @@
 
           </thead>
            <tbody>
-            <tr>
-              <td>01-09-2023</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Juan Dela Cruz</td>
-              <td>ITO III</td>
-              <td>TOD</td>
-              <td>Mount Malayarat golf & Country Club</td>
-              <td>01-12-2023</td>
-              <td>01-18-2023</td>
-              <td>Committees for Ceremonial</td>
-              <td>N/A</td>
-              <td>Project Funds</td>
-              <td>330 kms from DICT to destination</td>
-              <td>Pending</td>
-              <td>Pending</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
-             <tr>
-              <td>01-09-2023</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Juan Dela Cruz</td>
-              <td>ITO III</td>
-              <td>TOD</td>
-              <td>Mount Malayarat golf & Country Club</td>
-              <td>01-12-2023</td>
-              <td>01-18-2023</td>
-              <td>Committees for Ceremonial</td>
-              <td>N/A</td>
-              <td>Project Funds</td>
-              <td>330 kms from DICT to destination</td>
-              <td>Pending</td>
-              <td>Pending</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
-             <tr>
-              <td>01-09-2023</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Juan Dela Cruz</td>
-              <td>ITO III</td>
-              <td>TOD</td>
-              <td>Mount Malayarat golf & Country Club</td>
-              <td>01-12-2023</td>
-              <td>01-18-2023</td>
-              <td>Committees for Ceremonial</td>
-              <td>N/A</td>
-              <td>Project Funds</td>
-              <td>330 kms from DICT to destination</td>
-              <td>Pending</td>
-              <td>Pending</td>
-              <td>
-                <button class="view"><i class="fa fa-eye"></i></button>
-                <button class="edit"><i class="fa fa-edit"></i></button>
-                <button class="delete"><i class="fa fa-trash"></i></button>
-              </td>
-            </tr>
+            <?php
+
+            $cnt=1;
+            
+            $ret=mysqli_query($conn,"SELECT * from travelorder where requestedBy = '$result[fullName]' ");
+            
+            
+                  while ($row=mysqli_fetch_array($ret)) {
+                    ?>
+            
+                <tr>
+                  <td><?php echo $row['dateRequested'];?></td>
+                  <td><?php  echo $row['travelorderNo'];?></td>
+                  <td><?php  echo $row['controlNo'];?></td>
+                  <td><?php  echo $row['destination'];?></td>
+                  <td><?php  echo $row['inclusiveDate'];?></td>
+                  <td><?php  echo $row['endDate'];?></td>
+                  <td><?php  echo $row['purpose'];?></td>
+                  <td><?php  echo $row['division'];?></td>
+                  <td>
+                  <?php 
+                  if(!empty($row['generalfund'])){
+                        echo "General Fund:";
+                        echo "<br>";
+                        echo $row['generalfundDesc'];
+                        echo "<br>";
+            
+                  }
+            
+                  if(!empty($row['projectfund'])){
+                    echo "Project Fund:";
+                    echo "<br>";
+                    echo $row['projectfundDesc'];
+                    echo "<br>";
+                  }
+            
+                  if(!empty($row['others'])){
+                    echo "Others:";
+                    echo "<br>";
+                    echo $row['othersDesc'];
+                    echo "<br>";
+                  }
+                  
+                  
+                  ?>
+                  </td>
+                  <td><?php  echo $row['remarks'];?></td>
+                  <td><?php  echo $row['reqStatus'];?></td>
+                  <td><?php  echo $row['reqStatus'];?></td>
+                  <td>
+                   <a href=""><button class="view"><i class="fa fa-eye"></i></button></a>
+                  </td>
+                </tr>
+                    
+            <?php 
+            
+            $cnt=$cnt+1;
+            
+            
+            }?>
           </tbody>
 
             

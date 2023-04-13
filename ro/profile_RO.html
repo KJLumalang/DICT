@@ -1,3 +1,57 @@
+<?php 
+session_start(); 
+error_reporting();
+include ('../includes/config.php');
+include ('../includes/login_check.php');
+
+if(isset($_GET['editId'])){
+
+    $_SESSION['editId'] = $_GET['editId'];
+    $query = mysqli_query($conn,"select * from users where id='$_SESSION[editId]'");
+    $rowi = mysqli_fetch_array($query);   
+
+    }
+
+//UPDATE
+    if(isset($_POST['submit'])){
+
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $sex = $_POST['sex'];
+        $age = $_POST['age'];
+        $position = $_POST['position'];
+        $role = $_POST['role'];
+        $region = $_POST['region'];
+        $province = $_POST['province'];
+        $municipality = $_POST['municipality'];
+        $division = $_POST['division'];
+    
+    
+    
+        $ret=mysqli_query($conn,"update users set fullName='$fullname',username='$email',password='$password',sex='$sex',age='$age',position='$position',userType='$role',region='$region',province='$province',municipality='$municipality',division='$division' where id='$_SESSION[editId]'");
+        
+        if($ret){
+
+        echo "<script type = \"text/javascript\">
+        window.location = (\"viewProfile.php?editId=$_SESSION[editId];\")
+        </script>"; 
+   
+        }
+        else{
+          
+          $alertStyle ="alert alert-danger";
+          $statusMsg="An error Occurred!";
+    
+        }
+    }
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
