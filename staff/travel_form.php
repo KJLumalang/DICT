@@ -22,8 +22,23 @@ $result=mysqli_fetch_array($query);
 
 if(ISSET($_POST['submit'])){
 
+  $query1 = mysqli_query($conn, "SELECT * FROM users");
+  $result1=mysqli_fetch_array($query1);
+
   $travelers = $_POST['travelers'];
   $travelers1=implode('<br>', $travelers);
+
+  foreach ($travelers as $value) {
+    
+    if (str_contains($$result1, $value)) {
+
+      $newCount = $result1['token'] - 1;
+      $updateQuery = mysqli_query($conn,"UPDATE users SET token=$newCount WHERE fullName=$value");
+      
+  }
+
+  }
+ 
 
   $destination = $_POST['destination'];
   $inclusiveDate = $_POST['inclusiveDate'];
@@ -76,7 +91,6 @@ if(ISSET($_POST['submit'])){
   
     <!-- Bootstrap CSS File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,31 +105,55 @@ if(ISSET($_POST['submit'])){
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index_STAFF.html">
+          <a href="index.php">
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
         </li>
         <li>
-          <a href="travel_form.html" class="active">
+          <a href="travel_form.php" class="active">
             <i class='fa fa-wpforms' ></i>
             <span class="links_name">Request Travel Order</span>
           </a>
         </li>
          <li>
-          <a href="gatepass_form.html">
+          <a href="gatepass_form.php">
             <i class='bx bx-file' ></i>
             <span class="links_name">Request Gatepass</span>
           </a>
         </li>
+
         <li>
-          <a href="to_record.html">
-            <i class='bx bx-file-blank' ></i>
-            <span class="links_name">Request History</span>
-          </a>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="to_record.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gp_record.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
         </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+                </script>
+
         <li class="log_out">
-          <a href="login.html">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -337,9 +375,6 @@ function addEntry(){
 
         </form>
         </div>
-
-
-      
     </div>
 
   </section>

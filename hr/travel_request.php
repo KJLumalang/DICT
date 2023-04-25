@@ -7,12 +7,10 @@ include ('../includes/login_check.php');
 
   
 $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
-$result=mysqli_fetch_array($query);
+$rowi=mysqli_fetch_array($query);
 
 
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -20,52 +18,40 @@ $result=mysqli_fetch_array($query);
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="style_STAFF.css">
-    <title>Request History </title>
-    
+    <link rel="stylesheet" href="style_HR.css">
+    <title>HR-Request Records </title>
+  
       <!-- Bootstrap CSS File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  
+
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-          <!-- sidebar menu -->
- <div class="sidebar">
+            <!-- sidebar menu -->
+  <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name"><?php echo $result['fullName'];?></span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.php">
-            <i class='fa fa-user-circle' ></i>
-            <span class="links_name">Profile</span>
-          </a>
-        </li>
-        <li>
-          <a href="travel_form.php">
-            <i class='fa fa-wpforms' ></i>
-            <span class="links_name">Request Travel Order</span>
-          </a>
-        </li>
-         <li>
-          <a href="gatepass_form.php">
-            <i class='bx bx-file' ></i>
-            <span class="links_name">Request Gatepass</span>
+          <a href="index_HR.html">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Dashboard</span>
           </a>
         </li>
 
-        <li>
+       <li>
             <a class="dropdown-btn">
               <i class="bx bx-file-blank"></i>
               <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
             </a>
 
           <div class="dropdown-container">
-              <a href="to_record.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
-              <a href="gp_record.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+              <a href="travel_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gatepass_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
           </div>
         </li>
 
@@ -86,22 +72,51 @@ $result=mysqli_fetch_array($query);
                 }
                 </script>
 
+
         <li class="log_out">
-          <a href="../includes/logout.php">
+          <a href="../index.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
         </li>
       </ul>
   </div>
-
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Travel Order Requests</span>
       </div>
-       
+       <div class="profile-details">
+        <img src="profile.png" alt="" onclick="toggleMenu()">
+        <span class="admin_name" onclick="toggleMenu()"><?php echo $rowi['userType'];?></span>
+      </div>
+
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div class="user-info">
+            <img src="profile.png" alt="">
+            <h5><?php echo $rowi['fullName'];?></h5>
+          </div>
+          <hr>
+            <a href="profile_HR.html" class="sub-menu-link">
+              <i class='fa fa-user' ></i>
+              <p> View Profile </p>
+              <span>></span>
+            </a>
+            <a href="changepass_HR.html" class="sub-menu-link">
+              <i class='fa fa-lock' ></i>
+              <p> Change Password </p>
+              <span>></span>
+            </a>
+            <a href="../index.php" class="sub-menu-link">
+              <i class='fa fa-sign-out'></i>
+              <p> Logout </p>
+              <span>></span>
+            </a>
+
+        </div>
+      </div>
     </nav>
 
     <div class="home-content">
@@ -117,9 +132,9 @@ $result=mysqli_fetch_array($query);
       <div class="table_section">
         <table class="table_content">
           <thead>
-         
-              <!-- Table for list of travel request -->
-            <tr>
+    
+             <!-- Table for list of travel request -->
+             <tr>
               <th>DATE REQUESTED</th>
               <th>TRAVEL ORDER NO.</th>
               <th>CTRL NO.</th>
@@ -142,7 +157,7 @@ $result=mysqli_fetch_array($query);
 
 $cnt=1;
 
-$ret=mysqli_query($conn,"SELECT * from travelorder where requestedBy = '$result[fullName]' ");
+$ret=mysqli_query($conn,"SELECT * from travelorder");
 
 
       while ($row=mysqli_fetch_array($ret)) {
@@ -208,7 +223,6 @@ $cnt=$cnt+1;
 
 
 }?>
-        
           </tbody>
         </table>
         </div>

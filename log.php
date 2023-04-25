@@ -31,6 +31,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
             if ($row['username'] === $uname && $row['password'] === $pass) {
 
+				if($row['uStatus'] == 'Deactivated'){
+					header("Location: index.php?error=This account has been deactivated");
+					exit();
+				}
+
+				else{
+
 				$_SESSION['uname'] = $uname;
 				$_SESSION['id'] = $row['id'];
 
@@ -63,12 +70,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					header("Location: ro/index.php");
 					exit();
 				}
+
+				elseif($row['userType']=='DICT Employee'){
+					header("Location: employee/index.php");
+					exit();
+				}
 			
 				else{
 					header("Location: staff/index.php");
 					exit();
 				}
-
+			}
             	
             }else{
 				

@@ -127,7 +127,7 @@ nav .sidebar-button i{
   margin-right: 0px;
 }
 
-/** Admin profile sub menu**/
+/** profile sub menu**/
 
 .home-section nav .profile-details{
   display: flex;
@@ -220,10 +220,10 @@ nav .profile-details i{
   font-size: 25px;
   color: #333;
 }
-/** End--Admin profile sub menu**/
+/** End-- profile sub menu**/
 
 
-/** Admin Account information**/
+/**  Account information**/
 .wrapper{
   position:absolute;
   margin-top:50px;
@@ -327,7 +327,7 @@ nav .profile-details i{
   outline: none;
   box-shadow: none;
 }
-/** End--Admin Account information**/
+/** End-- Account information**/
 
 /**Change password**/
 .mainDiv{
@@ -432,6 +432,188 @@ nav .profile-details i{
   opacity:0;
 }
 /**End--Profile Picture**/
+
+/**Travel Form**/
+.container{
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+
+}
+.container header{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.container header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+}
+
+.container form{
+    position: relative;
+    margin-top: 16px;
+    min-height: 900px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.container form .form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+
+
+.container form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 3px 0;
+    color: #333;
+}
+.container form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.container form .DTE{
+  margin: 15px 0px 0px 0px;
+  
+}
+
+.container form .DTE .line{
+   border-top: 2px solid #a7a9ac;
+   margin-bottom:10px;
+  
+}
+form .fields .input-field1{
+    display: flex;
+    width: calc(100% / 2 - 15px);
+    flex-direction: column;
+    margin: 2px 0;
+
+}
+
+form .fields .input-field1 .oth{
+  width:100%;
+  
+}
+
+form .fields .input-field2{
+    display: flex;
+    width: calc(100% / 4 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+.container .input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.container .input-field input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.container .input-field input :focus,
+.container .input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+
+.container form button, .backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: gray;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container  .submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: #4070f4;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container  .reset{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: gray;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container form .btnText, .reset{
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+}
+
+form .buttons .submit:hover{
+  background-color:#0b759c;
+  cursor:pointer;
+}
+form .buttons .submit:active{
+  background-color:#0b759c;
+  transform: translateY(2px);
+}
+form .buttons .reset:hover{
+  background-color:#bfbfbf;
+  cursor:pointer;
+}
+form .buttons .reset:active{
+  background-color:#bfbfbf;
+  transform: translateY(2px);
+}
+
+form .buttons{
+    display: flex;
+    text-align: : center;
+    max-width: 200px;
+    width: 100%;
+    float:right;
+}
+/** End-Travel Form**/
+
 .home-section .home-content{
   position: relative;
   padding-top: 100px;
@@ -517,8 +699,8 @@ nav .profile-details i{
   width:100%;
   background-color:#f2f2f2;
   padding-top: 15px;
-  padding-left: 15px;
-   padding-right:20px;
+  padding-left: 20px;
+  padding-right:20px;
 }
 .table .table_ctnt{
   border:1px solid #fff;
@@ -624,7 +806,7 @@ table .table_content{
 
 thead th{
   top:0;
-   background-color:#c3cddb;
+ background-color:#c3cddb;
   color: #132747;
   font-size:13px;
   text-align: center;
@@ -905,6 +1087,31 @@ input{
   .sidebar.active ~ .home-section nav{
     left: 60px;
     width: calc(100% - 60px);
+  }
+  @media (max-width: 750px) {
+    .container form{
+        overflow-y: scroll;
+    }
+    .container form::-webkit-scrollbar{
+       display: none;
+    }
+    form .fields .input-field{
+        width: calc(100% / 3 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field1{
+        width: 100%;
+    }
+  form .fields .input-field2{
+        width: 50%;
+    
+    display: flex;
+    width: calc(100% / 3 - 30px);
+    flex-direction: column;
+    margin: 4px 0;
+    font-size: 10px;
   }
 }
  

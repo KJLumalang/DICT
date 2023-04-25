@@ -16,7 +16,6 @@ $result=mysqli_fetch_array($query);
 ?>
 
 
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -39,7 +38,7 @@ $result=mysqli_fetch_array($query);
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index_STAFF.html" class="active">
+          <a href="index.php" class="active">
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
@@ -51,17 +50,41 @@ $result=mysqli_fetch_array($query);
           </a>
         </li>
          <li>
-          <a href="gatepass_form.html">
+          <a href="gatepass_form.php">
             <i class='bx bx-file' ></i>
             <span class="links_name">Request Gatepass</span>
           </a>
         </li>
         <li>
-          <a href="to_record.html">
-            <i class='bx bx-file-blank' ></i>
-            <span class="links_name">Request History</span>
-          </a>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="to_record.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gp_record.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
         </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+
+
+                </script>
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>

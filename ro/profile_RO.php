@@ -72,7 +72,7 @@ include ('../includes/login_check.php');
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index_RO.html">
+          <a href="index.php">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -86,7 +86,7 @@ include ('../includes/login_check.php');
         </li>
         
         <li class="log_out">
-          <a href="../index.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -123,7 +123,7 @@ include ('../includes/login_check.php');
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>

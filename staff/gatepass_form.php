@@ -8,6 +8,7 @@ include ('../includes/login_check.php');
 
 $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
 $result=mysqli_fetch_array($query);
+$name = $result['fullName'];
 
 if(ISSET($_POST['submit'])){
 
@@ -27,13 +28,14 @@ if(ISSET($_POST['submit'])){
     $startTime = $_POST['start'];
     $endTime = $_POST['end'];
     $venue = $_POST['venue'];
-    $requestedBy = $_POST['requestedBy'];
+    $requestedBy = $name;
+    $dateRequested = date("Y/m/d");
 
     mysqli_query($conn, "INSERT INTO `gatepass`(travel, travelDesc, stcm, stcmDesc, pickup, pickupDesc, others, othersDesc, medication, medical, others2, others2Desc,
-    dates, startTime, endTime, venue, requestedBy, reqStatus, reqStatus2) 
+    dates, startTime, endTime, venue, requestedBy, reqStatus, reqStatus2, dateRequested) 
   VALUE 
   ('$traveler', '$travelerDesc', '$stcm', '$stcmDesc', '$pickup', '$pickupDesc', '$others', '$othersDesc', '$medication', '$medical', '$others2', '$others2Desc',
-  '$dates','$startTime', '$endTime', '$venue', '$requestedBy', 'Pending', 'Pending')") or die(mysqli_error());
+  '$dates','$startTime', '$endTime', '$venue', '$requestedBy', 'Pending', 'Pending', '$dateRequested')") or die(mysqli_error());
   
 
 
@@ -56,7 +58,9 @@ if(ISSET($_POST['submit'])){
     <link rel="stylesheet" href="style_STAFF.css">
     <title>Gatepass Form </title>
   
-   
+    <!-- Bootstrap CSS File-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -72,7 +76,7 @@ if(ISSET($_POST['submit'])){
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index_STAFF.php">
+          <a href="index.php">
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
@@ -90,13 +94,37 @@ if(ISSET($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="to_record.php">
-            <i class='bx bx-file-blank' ></i>
-            <span class="links_name">Request History</span>
-          </a>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="to_record.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gp_record.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
         </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+
+
+                </script>
         <li class="log_out">
-          <a href="login.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -237,7 +265,8 @@ if(ISSET($_POST['submit'])){
                       </div>
             
                       <div class="title">
-                          <label style="font-size:15px;">Start Time</label>
+                          <label style="font-size:15px;">Start Time:</label>
+                          <br>
                           <input type="time" placeholder="" name="start" required>
                           <label style="font-size:15px;">to</label>
                           <input type="time" placeholder="" name="end" required>

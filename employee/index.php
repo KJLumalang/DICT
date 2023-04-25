@@ -13,6 +13,7 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
     // name of the uploaded file
     $filename = $_FILES['myfile']['name'];
     $controlNo =$_POST['controlNo'];
+    $dateApproved = date("Y/m/d");
 
     // destination of the file on the server
     $destination = 'uploads/' . $filename;
@@ -32,17 +33,22 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
 
-          $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
+            $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
 
             if ($sql) {
 
-                echo "File uploaded successfully";
-                $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Approved' where controlNo = '$controlNo'");
+                $alertStyle ="alert alert-success";
+                $statusMsg="File Added Successfully!";
+          
+                $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus2 = 'Approved', dateApproved = '$dateApproved' where controlNo = '$controlNo'");
 
 
             }
         } else {
-            echo "Failed to upload file.";
+
+            $alertStyle ="alert alert-danger";
+            $statusMsg="An error Occurred!";
+
         }
     }
 }
@@ -51,13 +57,10 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
 if (isset($_POST['disapproved'])) { 
 
   $controlNo =$_POST['controlNo'];
-  $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Disapproved' where controlNo = '$controlNo'");
+  $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus2 = 'Disapproved' where controlNo = '$controlNo'");
 
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -65,8 +68,8 @@ if (isset($_POST['disapproved'])) {
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="approver_style.css">
-    <title>Approver-Travel Request </title>
+    <link rel="stylesheet" href="RD_style.css">
+    <title>RD-Travel Request </title>
   
     
 
@@ -84,13 +87,7 @@ if (isset($_POST['disapproved'])) {
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.php" class="active">
-            <i class='bx bx-car' ></i>
-            <span class="links_name">Travel Request</span>
-          </a>
-        </li>
-        <li>
-          <a href="approver_gatepass.php">
+          <a href="employee_gatepass.php">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
@@ -110,7 +107,7 @@ if (isset($_POST['disapproved'])) {
       </div>
        <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Approver</span>
+        <span class="admin_name" onclick="toggleMenu()">DICT Employee</span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
@@ -121,12 +118,12 @@ if (isset($_POST['disapproved'])) {
           </div>
           <hr>
 
-            <a href="approver_profile.php" class="sub-menu-link">
+            <a href="employee_profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="approver_changepass.php" class="sub-menu-link">
+            <a href="employee_changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
@@ -148,7 +145,7 @@ if (isset($_POST['disapproved'])) {
           
     <!--List of Travel Request that will be checked by the approver-->
       	<div class="table_ctnt">
-
+          
         <div class="twelve">
           <h4>List of Travel Request</h4>
         </div>
@@ -158,17 +155,18 @@ if (isset($_POST['disapproved'])) {
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div><br>
 
+      <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+
       <div class="table_section">
+
+     
         <table class="table_req">
-
+          
           <tbody>
-
-          <!--List of Travel Request that will be checked by the approver-->
+          
           <?php
-
-$cnt=1;
-
-$ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Pending' and controlNo != '0'");
+            $cnt=1;
+            $ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Approved' and reqStatus2 = 'Pending' and controlNo != '0'");
 
 
       while ($row=mysqli_fetch_array($ret)) {
@@ -178,7 +176,7 @@ $ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Pending' a
             <td data-label="DATE REQUESTED"><?php echo $row['dateRequested'];?></td>
             <td data-label="TRAVEL ORDER NUMBER"><?php echo $row['travelorderNo'];?></td>
             <td data-label="CONTROL NUMBER"><?php echo $row['controlNo'];?></td>
-            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/to.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "Travel Order#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
+            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/downloadRD.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "TO#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
   
             <td height="80px" data-label="SIGNED/APPROVED REQUEST">
               <input class="upload_btn" type="file" id="upload-file" name="myfile" required>
@@ -200,7 +198,6 @@ $cnt=$cnt+1;
 
 
 }?>
-
 
 
         </tbody>

@@ -33,7 +33,7 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
 
-            $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (name, size, downloads) VALUES ('$filename', $size, 0)");
+            $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
 
             if ($sql) {
 
@@ -87,19 +87,19 @@ if (isset($_POST['disapproved'])) {
     </div>
       <ul class="nav-links">
         <li>
-          <a href="RD_travel.html" class="active">
+          <a href="RD_travel.php" class="active">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="RD_gatepass.html">
+          <a href="RD_gatepass.php">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
         </li>
         <li class="log_out">
-          <a href="login.html">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -124,17 +124,17 @@ if (isset($_POST['disapproved'])) {
           </div>
           <hr>
 
-            <a href="RD_profile.html" class="sub-menu-link">
+            <a href="RD_profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="RD_changepass.html" class="sub-menu-link">
+            <a href="RD_changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="login.html" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -182,7 +182,7 @@ if (isset($_POST['disapproved'])) {
             <td data-label="DATE REQUESTED"><?php echo $row['dateRequested'];?></td>
             <td data-label="TRAVEL ORDER NUMBER"><?php echo $row['travelorderNo'];?></td>
             <td data-label="CONTROL NUMBER"><?php echo $row['controlNo'];?></td>
-            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/to.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "Travel Order#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
+            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/downloadRD.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "TO#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
   
             <td height="80px" data-label="SIGNED/APPROVED REQUEST">
               <input class="upload_btn" type="file" id="upload-file" name="myfile" required>

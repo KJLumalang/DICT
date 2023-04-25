@@ -5,9 +5,42 @@ include ('../includes/config.php');
 include ('../includes/login_check.php');
 
 
+$query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
+$rowi = mysqli_fetch_array($query);  
 
-    $query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
-    $rowi = mysqli_fetch_array($query);   
+if(isset($_POST['submit'])){
+
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sex = $_POST['sex'];
+    $age = $_POST['age'];
+    $position = $_POST['position'];
+    $role = $_POST['role'];
+    $region = $_POST['region'];
+    $province = $_POST['province'];
+    $municipality = $_POST['municipality'];
+    $division = $_POST['division'];
+
+
+
+    $ret=mysqli_query($conn,"update users set fullName='$fullname',username='$email',password='$password',sex='$sex',age='$age',position='$position',userType='$role',region='$region',province='$province',municipality='$municipality',division='$division' where id='$_SESSION[editId]'");
+    
+    if($ret){
+
+    echo "<script type = \"text/javascript\">
+    window.location = (\"viewProfile.php?editId=$_SESSION[editId];\")
+    </script>"; 
+
+    }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
+
+    }
+}
+    
 ?>
 
 
@@ -33,19 +66,19 @@ include ('../includes/login_check.php');
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.html">
+          <a href="index.php">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="approver_gatepass.html">
+          <a href="approver_gatepass.php">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
         </li>
         <li class="log_out">
-          <a href="login.html">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -72,17 +105,17 @@ include ('../includes/login_check.php');
           </div>
           <hr>
 
-            <a href="approver_profile.html" class="sub-menu-link">
+            <a href="approver_profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="approver_changepass.html" class="sub-menu-link">
+            <a href="approver_changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="login.html" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -93,105 +126,68 @@ include ('../includes/login_check.php');
 
     </nav>
 
-          <div class="modal fade" id="EditProfileModal" tabindex="-1" aria-labelledby="EditUserModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="EditProfileModalLabel">Edit Profile</h5>
-              </div>
-              <div class="modal-body">
-
-                <!-- Form to be fill-out to Edit Admin Profile -->
-                <form>
-
-                    <div class="profile_pic">
-                      <img src="profile.png" id="output" width=100 height=100 alt="">
-                      <div class="round">
-                        <input id="file" type="file" onchange="loadFile(event)"/>
-                        <i class="fa fa-camera" style="color:#fff"></i>
-                      </div>
-                    </div>
-
-                    <div class="user_name">
-                      <label for="Edit01">Username*</label>
-                      <input type="text" class="form-control" id="Edit01" required>
-                    </div><br>
-
-                    <div class="first_name">
-                      <label for="Editr02">First Name*</label>
-                      <input type="text" class="form-control" id="Edit02" required>
-                    </div><br>
-
-
-                    <div class="last_name">
-                      <label for="Edit03">Last Name*</label>
-                      <input type="text" class="form-control" id="Edit03" required>
-                    </div><br>
-
-
-                    <div class="email">
-                      <label for="Edit04">Email*</label>
-                      <input type="text" class="form-control" id="Edit04" required>
-                    </div><br>
-
-                    <div class="role">
-                      <label for="Editr05">Role*</label>
-                      <input type="text" class="form-control" id="Edit05" required>
-                    </div><br>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Update</button>
-                    </div><br>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    
        <div class="home-content">
 
        	<!--Admin Profile Information-->
       	<div class="wrapper">
       		<div class="top">
       			<img src="profile.png" alt="user" width="100">
-      			<h3>Juan Carlo</h3>
-      			<p>Administrator</p>
+      			<h3><?php echo $rowi['fullName'];?></h3>
+      			<p><?php echo $rowi['userType'];?></p>
       		</div>
       		<div class="bottom">
-      			<div class="info">
-
-      				 <!--Modal - Button used to Edit Admin Profile-->
-      				<div class="edit-button">
-		             <button type="button" class="btn btn-primary EditProfile" data-toggle="modal" data-target="#EditProfileModal"><i class="fa fa-edit"></i>
-		              Edit Profile
-		            </button>
-		        	</div>
+      			<div class="info">     				
 
 		        	<h4>Account Information</h4>
 
 		     <!--Admin Account Details-->
-      				<div class="info_data">
+             <div class="info_data">     		
       					<div class="data">
-      						<h6> Username</h6>
-      						<p>Admin</p>
+      						<h6> Full Name</h6>
+      						<p><?php echo $rowi['fullName'];?></p>
       					</div>
-      					<div class="data">
-      						<h6> First Name</h6>
-      						<p>Juan Carlo</p>
-      					</div>
-      					<div class="data">
-      						<h6> Last Name</h6>
-      						<p>Delo Santos</p>
-      					</div>
+      					
       					<div class="data">
       						<h6>Email</h6>
-      						<p>noreply@gmail.com</p>
+      						<p><?php echo $rowi['username'];?></p>
       					</div>
+
       					<div class="data">
       						<h6>Role</h6>
-      						<p>Administrator</p>
+      						<p><?php echo $rowi['userType'];?></p>
       					</div>
+
+                          <div class="data">
+      						<h6>Sex</h6>
+      						<p><?php echo $rowi['sex'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Age</h6>
+      						<p><?php echo $rowi['age'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Position</h6>
+      						<p><?php echo $rowi['position'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Region</h6>
+      						<p><?php echo $rowi['region'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Municipality</h6>
+      						<p><?php echo $rowi['municipality'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Division/Agency</h6>
+      						<p><?php echo $rowi['division'];?></p>
+      					</div>
+                        
       				</div>
       			</div>
       		</div>

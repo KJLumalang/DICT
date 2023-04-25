@@ -29,15 +29,14 @@ $disgatepassnum = mysqli_num_rows($result);
 
 ?>
 
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="style_RO.css">
-    <title>Record Officer-Dashboard</title>
+    <link rel="stylesheet" href="style_HR.css">
+    <title>HR/AFD-Dashboard </title>
   
      <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -51,7 +50,6 @@ $disgatepassnum = mysqli_num_rows($result);
       <img src="profile.png" alt="">
       <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
-
       <ul class="nav-links">
         <li>
           <a href="index.php" class="active">
@@ -59,13 +57,36 @@ $disgatepassnum = mysqli_num_rows($result);
             <span class="links_name">Dashboard</span>
           </a>
         </li>
+     
         <li>
-          <a href="RO_travel_request.php">
-            <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Record Request</span>
-          </a>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+            <div class="dropdown-container">
+              <a href="travel_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gatepass_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
         </li>
-      
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+                </script>
+
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
@@ -74,6 +95,8 @@ $disgatepassnum = mysqli_num_rows($result);
         </li>
       </ul>
   </div>
+
+  
   <!-- Top Navigation-->
   <section class="home-section">
     <nav class="nav_menu">
@@ -83,7 +106,7 @@ $disgatepassnum = mysqli_num_rows($result);
       </div>
       <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Records Officer </span>
+        <span class="admin_name" onclick="toggleMenu()"><?php echo $rowi['userType'];?></span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
@@ -93,13 +116,12 @@ $disgatepassnum = mysqli_num_rows($result);
             <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
-
-            <a href="profile_RO.php" class="sub-menu-link">
+            <a href="profile_HR.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass_RO.php" class="sub-menu-link">
+            <a href="changepass_HR.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
@@ -170,6 +192,8 @@ $disgatepassnum = mysqli_num_rows($result);
       </div>
   </section>
 
+  
+<!--Sidebar Menu-->
   <script>
    let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -182,14 +206,14 @@ sidebarBtn.onclick = function() {
 }
  </script>
 
-<!-- Admin profile Submenu-->
-<script>
-    let subMenu=document.getElementById("subMenu");
 
-    function toggleMenu(){
-      subMenu.classList.toggle("open-menu");
-    }
-</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<!-- Bootstrap Popper with Bundle -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

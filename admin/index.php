@@ -7,8 +7,22 @@ include ('../includes/login_check.php');
 $result=mysqli_query($conn,"SELECT * from travelorder where reqStatus2 = 'Pending' ");
 $travelnum = mysqli_num_rows($result);
 
+$result=mysqli_query($conn,"SELECT * from travelorder where reqStatus2 = 'Approved' ");
+$approvedtravelnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Disapproved' or reqStatus2 = 'Disapproved'  ");
+$distravelnum = mysqli_num_rows($result);
+
+
 $result=mysqli_query($conn,"SELECT * from gatepass where reqStatus2 = 'Pending' ");
 $gatepassnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from gatepass where reqStatus2 = 'Aprroved' ");
+$approvedgatepassnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from gatepass where reqStatus = 'Disapproved' or reqStatus2 = 'Disapproved'  ");
+$disgatepassnum = mysqli_num_rows($result);
+
 
 ?>
 
@@ -59,7 +73,7 @@ $gatepassnum = mysqli_num_rows($result);
           </a>
         </li>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -96,7 +110,7 @@ $gatepassnum = mysqli_num_rows($result);
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -114,7 +128,7 @@ $gatepassnum = mysqli_num_rows($result);
           <div class="right-side">
             <div class="box-topic">Gatepass</div>
             <div class="box-status">Approved</div>
-            <div class="number">0</div>
+            <div class="number"><?php echo$approvedgatepassnum;?></div>
           </div>
           <i class='bx bx-credit-card pic app'></i>
         </div>
@@ -122,7 +136,7 @@ $gatepassnum = mysqli_num_rows($result);
           <div class="right-side">
             <div class="box-topic">Travel Order</div>
             <div class="box-status">Approved</div>
-            <div class="number">0</div>
+            <div class="number"><?php echo $approvedtravelnum;?></div>
           </div>
           <i class='bx bx-credit-card-front pic app' ></i>
         </div>
@@ -146,7 +160,7 @@ $gatepassnum = mysqli_num_rows($result);
           <div class="right-side">
             <div class="box-topic">Gate Pass</div>
             <div class="box-status">Disapproved</div>
-            <div class="number">0</div>
+            <div class="number"><?php echo$disgatepassnum;?></div>
           </div>
           <i class='bx bxs-dislike pic dis' ></i>
         </div>
@@ -154,7 +168,7 @@ $gatepassnum = mysqli_num_rows($result);
           <div class="right-side">
             <div class="box-topic">Travel Order</div>
             <div class="box-status">Disapproved</div>
-            <div class="number">0</div>
+            <div class="number"><?php echo $distravelnum;?></div>
           </div>
           <i class='bx bx-dislike pic dis' ></i>
         </div>

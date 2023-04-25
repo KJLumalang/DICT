@@ -305,7 +305,7 @@ if(isset($_POST['submit'])){
               <td>
                <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="view"><i class="fa fa-eye"></i></button></a>
                <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="edit"><i class="fa fa-edit"></i></button></a>
-               <a href="deleteUser.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-trash"></i></button></a>
+               <a href="deleteUser.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-ban"></i></button></a>
               </td>
             </tr>
                 

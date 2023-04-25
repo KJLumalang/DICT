@@ -1,3 +1,4 @@
+
 <?php 
 session_start(); 
 error_reporting(0);
@@ -5,11 +6,11 @@ include ('../includes/config.php');
 include ('../includes/login_check.php');
 
 
-
     $query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
     $rowi = mysqli_fetch_array($query);   
-?>
 
+
+?>
 
 <!DOCTYPE html>
 
@@ -17,8 +18,8 @@ include ('../includes/login_check.php');
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="approver_style.css">
-    <title>Approver-Profile </title>
+    <link rel="stylesheet" href="RD_style.css">
+    <title>RD-Profile </title>
     
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,23 +30,23 @@ include ('../includes/login_check.php');
   <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name">Approver</span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.html">
+          <a href="index.php">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="approver_gatepass.html">
+          <a href="RD_gatepass.php">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
         </li>
         <li class="log_out">
-          <a href="login.html">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -61,28 +62,28 @@ include ('../includes/login_check.php');
       </div>
       <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Approver</span>
+        <span class="admin_name" onclick="toggleMenu()">Regional Director</span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5>Approver</h5>
+            <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
 
-            <a href="approver_profile.html" class="sub-menu-link">
+            <a href="RD_profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="approver_changepass.html" class="sub-menu-link">
+            <a href="RD_changepass.html" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="login.html" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -93,61 +94,6 @@ include ('../includes/login_check.php');
 
     </nav>
 
-          <div class="modal fade" id="EditProfileModal" tabindex="-1" aria-labelledby="EditUserModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="EditProfileModalLabel">Edit Profile</h5>
-              </div>
-              <div class="modal-body">
-
-                <!-- Form to be fill-out to Edit Admin Profile -->
-                <form>
-
-                    <div class="profile_pic">
-                      <img src="profile.png" id="output" width=100 height=100 alt="">
-                      <div class="round">
-                        <input id="file" type="file" onchange="loadFile(event)"/>
-                        <i class="fa fa-camera" style="color:#fff"></i>
-                      </div>
-                    </div>
-
-                    <div class="user_name">
-                      <label for="Edit01">Username*</label>
-                      <input type="text" class="form-control" id="Edit01" required>
-                    </div><br>
-
-                    <div class="first_name">
-                      <label for="Editr02">First Name*</label>
-                      <input type="text" class="form-control" id="Edit02" required>
-                    </div><br>
-
-
-                    <div class="last_name">
-                      <label for="Edit03">Last Name*</label>
-                      <input type="text" class="form-control" id="Edit03" required>
-                    </div><br>
-
-
-                    <div class="email">
-                      <label for="Edit04">Email*</label>
-                      <input type="text" class="form-control" id="Edit04" required>
-                    </div><br>
-
-                    <div class="role">
-                      <label for="Editr05">Role*</label>
-                      <input type="text" class="form-control" id="Edit05" required>
-                    </div><br>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Update</button>
-                    </div><br>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
 
        <div class="home-content">
 
@@ -155,43 +101,62 @@ include ('../includes/login_check.php');
       	<div class="wrapper">
       		<div class="top">
       			<img src="profile.png" alt="user" width="100">
-      			<h3>Juan Carlo</h3>
-      			<p>Administrator</p>
+      			<h3><?php echo $rowi['fullName'];?></h3>
+      			<p>Regional Director</p>
       		</div>
       		<div class="bottom">
       			<div class="info">
 
-      				 <!--Modal - Button used to Edit Admin Profile-->
-      				<div class="edit-button">
-		             <button type="button" class="btn btn-primary EditProfile" data-toggle="modal" data-target="#EditProfileModal"><i class="fa fa-edit"></i>
-		              Edit Profile
-		            </button>
-		        	</div>
 
 		        	<h4>Account Information</h4>
 
 		     <!--Admin Account Details-->
-      				<div class="info_data">
+             <div class="info_data">     		
       					<div class="data">
-      						<h6> Username</h6>
-      						<p>Admin</p>
+      						<h6> Full Name</h6>
+      						<p><?php echo $rowi['fullName'];?></p>
       					</div>
-      					<div class="data">
-      						<h6> First Name</h6>
-      						<p>Juan Carlo</p>
-      					</div>
-      					<div class="data">
-      						<h6> Last Name</h6>
-      						<p>Delo Santos</p>
-      					</div>
+      					
       					<div class="data">
       						<h6>Email</h6>
-      						<p>noreply@gmail.com</p>
+      						<p><?php echo $rowi['username'];?></p>
       					</div>
+
       					<div class="data">
       						<h6>Role</h6>
-      						<p>Administrator</p>
+      						<p><?php echo $rowi['userType'];?></p>
       					</div>
+
+                          <div class="data">
+      						<h6>Sex</h6>
+      						<p><?php echo $rowi['sex'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Age</h6>
+      						<p><?php echo $rowi['age'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Position</h6>
+      						<p><?php echo $rowi['position'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Region</h6>
+      						<p><?php echo $rowi['region'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Municipality</h6>
+      						<p><?php echo $rowi['municipality'];?></p>
+      					</div>
+
+                          <div class="data">
+      						<h6>Division/Agency</h6>
+      						<p><?php echo $rowi['division'];?></p>
+      					</div>
+
       				</div>
       			</div>
       		</div>

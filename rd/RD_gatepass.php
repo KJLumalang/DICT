@@ -1,72 +1,70 @@
-<?php 
-session_start(); 
-error_reporting();
+<?php
+// Starting the session, to use and
+// store data in session variable
+session_start();
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 
-$query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
-$rowi = mysqli_fetch_array($query);   
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
+$result=mysqli_fetch_array($query);
 
 
 // Uploads files and approved
 if (isset($_POST['upload'])) { // if save button on the form is clicked
-    // name of the uploaded file
-    $filename = $_FILES['myfile']['name'];
-    $controlNo =$_POST['controlNo'];
+  // name of the uploaded file
+  $filename = $_FILES['myfile']['name'];
+  $controlNo =$_POST['controlNo'];
 
-    // destination of the file on the server
-    $destination = 'uploads/' . $filename;
+  // destination of the file on the server
+  $destination = 'uploads1/' . $filename;
 
-    // get the file extension
-    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+  // get the file extension
+  $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    // the physical file on a temporary uploads directory on the server
-    $file = $_FILES['myfile']['tmp_name'];
-    $size = $_FILES['myfile']['size'];
+  // the physical file on a temporary uploads directory on the server
+  $file = $_FILES['myfile']['tmp_name'];
+  $size = $_FILES['myfile']['size'];
 
-    if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
-        echo "You file extension must be .zip, .pdf or .docx";
-    } elseif ($_FILES['myfile']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
-        echo "File too large!";
-    } else {
-        // move the uploaded (temporary) file to the specified destination
-        if (move_uploaded_file($file, $destination)) {
+  if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
+      echo "You file extension must be .zip, .pdf or .docx";
+  } elseif ($_FILES['myfile']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
+      echo "File too large!";
+  } else {
+      // move the uploaded (temporary) file to the specified destination
+      if (move_uploaded_file($file, $destination)) {
 
-          $sql=mysqli_query($conn,"INSERT INTO travelorderfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
+          $sql=mysqli_query($conn,"INSERT INTO gatepassfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
 
-            if ($sql) {
+          if ($sql) {
 
-                echo "File uploaded successfully";
-                $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Approved' where controlNo = '$controlNo'");
+              echo "File uploaded successfully";
+              $update = mysqli_query($conn, "UPDATE gatepass SET reqStatus2 = 'Approved' where id = '$controlNo'");
 
 
-            }
-        } else {
-            echo "Failed to upload file.";
-        }
-    }
+          }
+      } else {
+          echo "Failed to upload file.";
+      }
+  }
 }
 
 //if disapproved
 if (isset($_POST['disapproved'])) { 
 
-  $controlNo =$_POST['controlNo'];
-  $update = mysqli_query($conn, "UPDATE travelorder SET reqStatus = 'Disapproved' where controlNo = '$controlNo'");
+$controlNo =$_POST['controlNo'];
+$update = mysqli_query($conn, "UPDATE gatepass SET reqStatus2 = 'Disapproved' where id = '$controlNo'");
 
 }
 
 ?>
-
-
-
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="approver_style.css">
-    <title>Approver-Travel Request </title>
+    <link rel="stylesheet" href="RD_style.css">
+    <title>RD-Gatepass Request </title>
   
     
 
@@ -80,17 +78,17 @@ if (isset($_POST['disapproved'])) {
   <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
+      <span class="logo_name"><?php echo $result['fullName'];?></span>
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.php" class="active">
+          <a href="index.php">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
         <li>
-          <a href="approver_gatepass.php">
+          <a href="RD_gatepass.php" class="active">
             <i class='bx bx-door-open' ></i>
             <span class="links_name">Gatepass Request</span>
           </a>
@@ -110,23 +108,23 @@ if (isset($_POST['disapproved'])) {
       </div>
        <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Approver</span>
+        <span class="admin_name" onclick="toggleMenu()">Regional Director</span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5><?php echo $rowi['fullName'];?></h5>
+            <h5><?php echo $result['fullName'];?></h5>
           </div>
           <hr>
 
-            <a href="approver_profile.php" class="sub-menu-link">
+            <a href="RD_profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="approver_changepass.php" class="sub-menu-link">
+            <a href="RD_changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
@@ -145,30 +143,28 @@ if (isset($_POST['disapproved'])) {
   
     <div class="home-content">
       <div class="table">
-          
-    <!--List of Travel Request that will be checked by the approver-->
-      	<div class="table_ctnt">
-
+       <!--List of Gatepass Request that will be checked by the approver-->
+        <div class="table_ctnt">
+        
         <div class="twelve">
-          <h4>List of Travel Request</h4>
+          <h4>List of Gate Pass Request</h4>
         </div>
 
       <div class="search">
           <input class="search-box" placeholder="search">
           <button class="search_here"><i class='bx bx-search'></i></button>
-      </div><br>
+      </div>
 
       <div class="table_section">
         <table class="table_req">
-
+          
           <tbody>
 
-          <!--List of Travel Request that will be checked by the approver-->
-          <?php
+    <?php
 
-$cnt=1;
+    $cnt=1;
 
-$ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Pending' and controlNo != '0'");
+    $ret=mysqli_query($conn,"SELECT * from gatepass where reqStatus = 'Approved' and reqStatus2 = 'Pending'");
 
 
       while ($row=mysqli_fetch_array($ret)) {
@@ -176,13 +172,11 @@ $ret=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Pending' a
             <form method="POST" enctype="multipart/form-data">
             <tr>
             <td data-label="DATE REQUESTED"><?php echo $row['dateRequested'];?></td>
-            <td data-label="TRAVEL ORDER NUMBER"><?php echo $row['travelorderNo'];?></td>
-            <td data-label="CONTROL NUMBER"><?php echo $row['controlNo'];?></td>
-            <td data-label="TRAVEL REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/to.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><?php echo "Travel Order#".$row['controlNo']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
-  
+            <td data-label="CONTROL NUMBER"><?php echo $row['id'];?></td>
+            <td data-label="GATEPASS REQUEST FILE"><i class='bx bxs-file-pdf' ></i><a href="../includes/downloadRD1.php?controlNo=<?php echo $row['id'];?>" target="_blank"><?php echo "GATEPASS#".$row['id']."_".$row['requestedBy']."_".$row['dateRequested'];?></a></td>
             <td height="80px" data-label="SIGNED/APPROVED REQUEST">
               <input class="upload_btn" type="file" id="upload-file" name="myfile" required>
-              <input value="<?php echo $row['controlNo'];?>" name="controlNo" type="hidden">
+              <input value="<?php echo $row['id'];?>" name="controlNo" type="hidden">
 
               </button>
             </td>
@@ -200,16 +194,11 @@ $cnt=$cnt+1;
 
 
 }?>
-
-
-
         </tbody>
-        </table>
+      </table>
       </div>
       </div>
-    </div>
-    </div>
-
+      </div>
       
     </div>
 
@@ -259,12 +248,12 @@ sidebarBtn.onclick = function() {
 </script>
 
 <script>
-	var loadFile = function (event) {
+  var loadFile = function (event) {
   var image = document.getElementById("output");
   image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-	</script>
+  </script>
 
 
 <!-- Bootstrap Popper with Bundle -->

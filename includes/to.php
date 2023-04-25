@@ -29,7 +29,7 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <type="text/css" media="print" />
     <!-- CSS-->
     <style>
     	/* ===== Google Font Import - Poppins ===== */
@@ -49,7 +49,7 @@ else{
 			    background: rgb(150, 145, 145);;
 			}
 			.container{
-			    position: relative;
+			   
 			    max-width: 1000px;
 			    width: 100%;
 			    height:100%;
@@ -62,20 +62,60 @@ else{
 			  margin-left: auto;
 			  margin-right: auto;
 			}
-    </style>
-     
 
-    <title>Travel Order</title> 
+			.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 7px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 12px;
+			margin: 4px 2px;
+			cursor: pointer;
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			float: right;
+			}
+
+			.button1 {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+			}
+
+			.button2:hover {
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+			}
+
+    </style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script>
+		window.jsPDF = window.jspdf.jsPDF;
+		var docPDF = new jsPDF();
+		function print(){
+		var elementHTML = document.querySelector("#print");
+		docPDF.html(elementHTML, {
+		callback: function(docPDF) {
+		docPDF.save('<?php echo $controlNo;?>');
+		},
+		x: 15,
+		y: 15,
+		width: 100%,
+		windowWidth: 650
+		});
+		}
+	</script>	
+    <title><?php echo "TO#".$controlNo."_".$rowi['requestedBy']."_".$rowi['dateRequested'];?></title> 
 </head>
+
 <body>
 
-    <div class="container">
-
-
+    <div class="container" id="print">
 	<!--Header-->	
     <table style="margin-left: auto;  margin-right: auto;">
 	<tr>
-		<td><img style="width:130px;" src="DICT logo.png">
+	<td><img style="width:130px; display:block;" src="DICT logo.png">
 	</td>
 
 
@@ -278,7 +318,7 @@ else{
 			</tr>
 		</table>
 
-		<div style="width:800px;">
+		<div style="width:790px;">
 			<p> A report of your travel must be submitted to the Agency Head/ Supervising Official within 7days from 
 			completion of travel. Liquidation of cash should be in accordance with Executive Order No. 77: Rules
 			and Regulation and New Rates of Allowances for Official Local and Foreign Travels of Government Personnel.
@@ -298,12 +338,12 @@ else{
 			</tr>
 			<tr>
 				<td style="width:800px; height:150px; padding-bottom:0px;">
-					<b>NAME</b>
+					<b></b>
 					<p>Head, Technical Operations Division</p>
 				</td>
 
 				<td style="width:500px;">
-					<b>NAME</b>
+					<b></b>
 					<p>Regional Director</p>
 				</td>
 			</tr>
@@ -319,11 +359,13 @@ else{
 			<p style="text-align: center; color:#0f5387;">DICT Regional IV-A and IV-B</p>
 			<p style="text-align: center; color:#0f5387;">DICT Telecom Road, Capitol Site, Kumintang Ibaba, Batangas City 4200</p>
 			<p style="text-align: center; color:#0f5387;">Telepphone Number: (043) 773 0275</p>
-
 			</td>
 			</tr>
 		</table>
-
+		
     </div>
+	
+
+	
 </body>
 </html>
