@@ -10,7 +10,7 @@ include ('../includes/login_check.php');
 
 
 $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
-$result=mysqli_fetch_array($query);
+$rowi=mysqli_fetch_array($query);
 
 
 ?>
@@ -33,85 +33,100 @@ $result=mysqli_fetch_array($query);
    </head>
 <body>
             <!-- sidebar menu -->
-  <div class="sidebar">
+ <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name"><?php echo $result['fullName'];?></span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
-      <ul class="nav-links">
-        <li>
-          <a href="index_HR.html">
-            <i class='bx bx-grid-alt'></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-        </li>
 
-        <li>
-            <a class="dropdown-btn">
-              <i class="bx bx-file-blank"></i>
-              <span class="links_name">Request History</span> <i class="fa fa-caret-down arrow"></i>
-            </a>
+    <div class="sidenav">
+		  <a href="index.php" style:"text-decoration: none;"><i class='bx bx-grid-alt'></i>
+		    <span class="links_name">Dashboard</span></a>
 
-          <div class="dropdown-container">
-              <a href="travel_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
-              <a href="gatepass_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
-          </div>
-        </li>
+		  <button class="dropdown-btn"> <i class='fa fa-wpforms'></i>
+		    <span class="links_name">Travel Order</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 24px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="todApproved.php">TOD Approved</a>
+		    <a href="rdApproved.php">TOD & RD Approved</a>
+			</div>
 
-                <script>
-                 var dropdown = document.getElementsByClassName("dropdown-btn");
-                  var i;
+      <button class="dropdown-btn"> <i class='fa fa-wpforms'></i>
+		    <span class="links_name">Gatepass</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 24px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="todgpApproved.php">TOD Approved</a>
+		    <a href="employeegpApproved.php">TOD & DE Approved</a>
+			</div>
 
-                for (i = 0; i < dropdown.length; i++) {
-                  dropdown[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.display === "block") {
-                      dropdownContent.style.display = "none";
-                    } else {
-                      dropdownContent.style.display = "block";
-                    }
-                  });
-                }
-                </script>
+			<button class="dropdown-btn">  <i class="bx bx-file-blank"></i>
+		    <span class="links_name">Request History</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 0px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="travel_request.php">Travel Order</a>
+		    <a href="gatepass_request.php">GatePass</a>
+			</div>
 
-        <li class="log_out">
-          <a href="../index.php">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Log out</span>
-          </a>
-        </li>
-      </ul>
-  </div>
+		
+	          <a href="../includes/logout.php" class="log_out">
+	            <i class='bx bx-log-out'></i>
+	            <span class="links_name">Log out</span>
+	          </a>
+</div>
+
+<script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+      </script>
+          
+</div>
+
   <section class="home-section">
-    <nav>
+    <nav class="nav_menu">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Gatepass Requests</span>
+        <span class="dashboard">Gatepass Request</span>
       </div>
-       <div class="profile-details">
+      <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()"><?php echo $result['userType'];?></span>
+        <span class="admin_name" onclick="toggleMenu()"><?php echo $rowi['userType'];?> </span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5><?php echo $result['fullName'];?></h5>
+            <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
-            <a href="profile_HR.html" class="sub-menu-link">
+
+            <a href="profile_HR.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass_HR.html" class="sub-menu-link">
+            <a href="changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -119,6 +134,7 @@ $result=mysqli_fetch_array($query);
 
         </div>
       </div>
+
     </nav>
 
     <!-- Table for list of request -->
@@ -127,17 +143,15 @@ $result=mysqli_fetch_array($query);
         <div class="table_ctnt">
           
       <div class="search">
-          <input class="search-box" placeholder="search">
+          <input class="search-box d-search table-filter" placeholder="search" data-table="table_content">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
       <div class="table_section">
         <table class="table_content">
           <thead>
             
-         
-            
-                <!-- Table for list of Gatepass request -->
-                <tr>
+              <!-- Table for list of Gatepass request -->
+              <tr class="header">
               <th>DATE REQUESTED</th>
               <th>CTRL NO.</th>
               <th width="200px">OFFICIAL</th>
@@ -270,7 +284,7 @@ sidebarBtn.onclick = function() {
       subMenu.classList.toggle("open-menu");
     }
 </script>
-
+<script src="../includes/search.js"></script>
 </body>
 </html>
 

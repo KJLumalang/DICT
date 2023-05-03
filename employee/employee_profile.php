@@ -39,12 +39,6 @@ include ('../includes/login_check.php');
             <span class="links_name">Travel Request</span>
           </a>
         </li>
-        <li>
-          <a href="RD_gatepass.php">
-            <i class='bx bx-door-open' ></i>
-            <span class="links_name">Gatepass Request</span>
-          </a>
-        </li>
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
@@ -62,7 +56,7 @@ include ('../includes/login_check.php');
       </div>
       <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Regional Director</span>
+        <span class="admin_name" onclick="toggleMenu()">DICT Employee</span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
@@ -102,7 +96,7 @@ include ('../includes/login_check.php');
       		<div class="top">
       			<img src="profile.png" alt="user" width="100">
       			<h3><?php echo $rowi['fullName'];?></h3>
-      			<p>Regional Director</p>
+      			<p>DICT Employee</p>
       		</div>
       		<div class="bottom">
       			<div class="info">

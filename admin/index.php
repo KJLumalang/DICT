@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-error_reporting();
+error_reporting(0);
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 
@@ -49,7 +49,7 @@ $disgatepassnum = mysqli_num_rows($result);
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.html" class="active">
+          <a href="index.php" class="active">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
@@ -67,11 +67,41 @@ $disgatepassnum = mysqli_num_rows($result);
           </a>
         </li>
         <li>
-          <a href="tra_request.html">
-            <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Request Records</span>
+          <a href="credits.php">
+            <i class='fa fa-plus'></i>
+            <span class="links_name">Request Credits</span>
           </a>
         </li>
+        <li>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request Records</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="tra_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gate_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
+        </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+
+                </script>
+
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
@@ -100,7 +130,7 @@ $disgatepassnum = mysqli_num_rows($result);
           </div>
           <hr>
 
-            <a href="profile.html" class="sub-menu-link">
+            <a href="profile.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
@@ -196,6 +226,16 @@ sidebarBtn.onclick = function() {
       subMenu.classList.toggle("open-menu");
     }
 </script>
+
+
+<!--CSS Only-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<!-- Bootstrap Popper with Bundle -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

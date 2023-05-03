@@ -22,20 +22,25 @@ $result=mysqli_fetch_array($query);
 
 if(ISSET($_POST['submit'])){
 
-  $query1 = mysqli_query($conn, "SELECT * FROM users");
+  $query1 = mysqli_query($conn, "SELECT fullName FROM users");
   $result1=mysqli_fetch_array($query1);
 
   $travelers = $_POST['travelers'];
   $travelers1=implode('<br>', $travelers);
 
+  if($result['token']>0){
+  
+
   foreach ($travelers as $value) {
     
-    if (str_contains($$result1, $value)) {
-
-      $newCount = $result1['token'] - 1;
-      $updateQuery = mysqli_query($conn,"UPDATE users SET token=$newCount WHERE fullName=$value");
       
-  }
+      $value1 = strtok($value, '/');
+      $query2 = mysqli_query($conn, "SELECT * FROM users where fullName LIKE '%{$value1}%' ");
+      $result2=mysqli_fetch_array($query2);
+      $newCount = $result2['token'] - 1;
+      $updateQuery = mysqli_query($conn,"UPDATE users SET token= $newCount WHERE fullName  LIKE '%{$value1}%'");
+      
+
 
   }
  
@@ -68,12 +73,34 @@ if(ISSET($_POST['submit'])){
 
 
 
-  mysqli_query($conn, "INSERT INTO `travelorder`(travelers, destination, inclusiveDate, endDate, division, purpose, actualDesc, perDiemDesc, transpoDesc, othersDesc, generalfundDesc, projectfundDesc, others1Desc, remarks, dateRequested, reqStatus, reqStatus2, requestedBy,
+  $query = mysqli_query($conn, "INSERT INTO `travelorder`(travelers, destination, inclusiveDate, endDate, division, purpose, actualDesc, perDiemDesc, transpoDesc, othersDesc, generalfundDesc, projectfundDesc, others1Desc, remarks, dateRequested, reqStatus, reqStatus2, requestedBy,
   actual, perDiem, transpo, others, generalfund, projectfund, others1 ) 
   VALUE 
   ('$travelers1', '$destination', '$inclusiveDate', '$endDate', '$division', '$purpose', '$perDiem', '$transpo', '$travelers1', '$others', '$generalfund', '$projectfund', '$others1', '$remarks', '$dateRequested', '$reqStatus', '$reqStatus2', '$requestedBy',
   '$actualCB', '$perDiemCB', '$transpoCB', '$othersCB', '$generalFundCB', '$projectFundCB', '$Others1CB')") or die(mysqli_error());
+
   
+if($query){
+
+  $alertStyle ="alert alert-success";
+  $statusMsg="Request Sent Successfully";
+
+}
+else{
+  
+  $alertStyle ="alert alert-danger";
+  $statusMsg="An error Occurred!";
+
+}
+
+  
+}
+
+else{
+  $alertStyle ="alert alert-danger";
+  $statusMsg="You don't have enough request credits";
+  }
+
 }
 
 
@@ -91,11 +118,13 @@ if(ISSET($_POST['submit'])){
   
     <!-- Bootstrap CSS File-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
+    
     
             <!-- sidebar menu -->
  <div class="sidebar">
@@ -104,8 +133,14 @@ if(ISSET($_POST['submit'])){
       <span class="logo_name"><?php echo $result['fullName'];?></span>
     </div>
       <ul class="nav-links">
+      <li>
+          <a href="index.php" >
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
         <li>
-          <a href="index.php">
+          <a href="profile.php">
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
@@ -173,11 +208,12 @@ if(ISSET($_POST['submit'])){
     <div class="home-content">
       <div class="container">
   
-        <header>Travel Order Form</header>
-        
+        <header>Travel Order Form  [Request Credits: <?php echo $result['token'];?>]</header>
+       
         <form method="POST">
-    
+                   <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
             <div class="form first">
+         
                 <div class="details personal">
                   <span class="title">Local Travel Order</span>
 

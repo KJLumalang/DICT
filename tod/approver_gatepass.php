@@ -38,19 +38,24 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
 
           if ($sql) {
 
-              echo "File uploaded successfully";
+              $alertStyle ="alert alert-success";
+              $statusMsg="Approved and file uploaded successfully";
               $update = mysqli_query($conn, "UPDATE gatepass SET reqStatus = 'Approved' where id = '$controlNo'");
 
 
           }
       } else {
-          echo "Failed to upload file.";
+          $alertStyle ="alert alert-danger";
+          $statusMsg="An error occured";
       }
   }
 }
 
 //if disapproved
 if (isset($_POST['disapproved'])) { 
+
+$alertStyle ="alert alert-danger";
+$statusMsg="Request Disapproved";
 
 $controlNo =$_POST['controlNo'];
 $update = mysqli_query($conn, "UPDATE gatepass SET reqStatus = 'Disapproved' where id = '$controlNo'");
@@ -71,7 +76,7 @@ $update = mysqli_query($conn, "UPDATE gatepass SET reqStatus = 'Disapproved' whe
     <title>Approver-Gatepass Request </title>
   
     
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -155,11 +160,12 @@ $update = mysqli_query($conn, "UPDATE gatepass SET reqStatus = 'Disapproved' whe
         </div>
 
       <div class="search">
-          <input class="search-box" placeholder="search">
+          <input class="search-box d-search table-filter" placeholder="search" data-table="table_req">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div><br>
 
       <div class="table_section">
+      <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
         <table class="table_req">
           
           <tbody>
@@ -267,7 +273,7 @@ sidebarBtn.onclick = function() {
 <!-- Bootstrap Popper with Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+    <script src="../includes/search.js"></script>
 </body>
 </html>
 

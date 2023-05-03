@@ -29,7 +29,7 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <type="text/css" media="print" />
     <!-- CSS-->
     <style>
     	/* ===== Google Font Import - Poppins ===== */
@@ -49,7 +49,7 @@ else{
 			    background: rgb(150, 145, 145);;
 			}
 			.container{
-			    position: relative;
+			   
 			    max-width: 1000px;
 			    width: 100%;
 			    height:100%;
@@ -62,20 +62,60 @@ else{
 			  margin-left: auto;
 			  margin-right: auto;
 			}
-    </style>
-     
 
+			.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 7px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 12px;
+			margin: 4px 2px;
+			cursor: pointer;
+			-webkit-transition-duration: 0.4s; /* Safari */
+			transition-duration: 0.4s;
+			float: right;
+			}
+
+			.button1 {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+			}
+
+			.button2:hover {
+			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+			}
+
+    </style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script>
+		window.jsPDF = window.jspdf.jsPDF;
+		var docPDF = new jsPDF();
+		function print(){
+		var elementHTML = document.querySelector("#print");
+		docPDF.html(elementHTML, {
+		callback: function(docPDF) {
+		docPDF.save('<?php echo $controlNo;?>');
+		},
+		x: 15,
+		y: 15,
+		width: 100%,
+		windowWidth: 650
+		});
+		}
+	</script>	
     <title><?php echo "TO#".$controlNo."_".$rowi['requestedBy']."_".$rowi['dateRequested'];?></title> 
 </head>
+
 <body>
 
-    <div class="container">
-
-
+    <div class="container" id="print">
 	<!--Header-->	
     <table style="margin-left: auto;  margin-right: auto;">
 	<tr>
-		<td><img style="width:130px;" src="DICT logo.png">
+	<td><img style="width:130px; display:block;" src="DICT logo.png">
 	</td>
 
 
@@ -101,10 +141,10 @@ else{
 
 				<td style="text-align:right;">
 					<!--Display Date Requested-->
-					<b>DATE:</b>
+					<b>DATE: </b>
 				</td>
 				<td>
-					<p><?php echo $rowi['dateRequested'];?></p>
+					<p>&nbsp;<?php echo $rowi['dateRequested'];?></p>
 				</td>
 			</tr>
 
@@ -118,7 +158,7 @@ else{
 					<b>CTRL No:</b>
 				</td>
 				<td>
-					<p> <?php echo $rowi['controlNo'];?></p>
+					<p>&nbsp;<?php echo $rowi['controlNo'];?></p>
 				</td>
 			</tr>
 		</table>
@@ -187,11 +227,11 @@ else{
 			</tr>
 		</table>
 <div>
-	<div style="width: 100%; height:auto;">
-        	<div style="width: 30%; height:auto; float: left;"> 
+	<div style="width: 100%; height:200px;">
+        	<div style="width: 30%; height:150px; float: left;"> 
 
         		<!--Display Daily Travel Expenses (DTE)-->
-            	<table style=" width:200px; padding-left:10px; padding-top: 10px;">
+            	<table style=" width:250px; padding-left:10px; padding-top: 10px;">
 			      		<caption>
 							
 							<b>Daily Travel Expenses (DTE) to be incurred:</b>
@@ -201,61 +241,38 @@ else{
 						<tr>
 							<td>
 							<b><input type="checkbox" <?php echo $rowi['actual'];?> disabled> Actual</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['actualDesc'])){
-							 echo $rowi['actualDesc'];}
-							 else{ echo 'N/A';}								
-							?></p>
+							<p style="padding-left: 30px;"><?php echo $rowi['actualDesc'];?></p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
 							<b><input type="checkbox" <?php echo $rowi['perDiem'];?> disabled> Per Diem</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['perDiemDesc'])){
-							 echo $rowi['perDiemDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<p style="padding-left: 30px;"><?php echo $rowi['perDiemDesc'];?></p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
 							<b><input type="checkbox" <?php echo $rowi['transpo'];?> disabled> Transportation</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['transpoDesc'])){
-							 echo $rowi['transpoDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<p style="padding-left: 30px;"><?php echo $rowi['transpoDesc'];?></p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
 							<b> <input type="checkbox" <?php echo $rowi['others'];?> disabled> Others</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['othersDesc'])){
-							 echo $rowi['othersDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<p style="padding-left: 30px;"><?php echo $rowi['othersDesc'];?></p>
 							</td>
 						</tr>
 			    </table>
         	</div>
 
-        	<div style="margin-left: 30%; height:auto;"> 
+        	<div style="margin-left: 30%;  height:200%px;"> 
 
         		<!--Display Appropriation/ Fund to which travel expenses would be charged to.-->
 
-            	<table style=" width:570px;padding-left:30px; padding-top: 10px; border-spacing:20px 5px;">
+            	<table style=" width:570px;padding-left:10px; padding-top: 10px; border-spacing:20px 5px;">
 			      		<caption>
 							<b>Appropriation/ Fund to which travel expenses would be charged to:</b>	
 						</caption>
@@ -288,9 +305,8 @@ else{
         	</div>
     	</div>
 
-	<div style="float:left;">
     	<!-- Display Special Instructions -->
-		<table style="padding-top: 20px; padding-bottom: 20px; border-spacing: 0px; ">
+		<table style="padding-top: 10px; padding-bottom: 20px; border-spacing: 0px;">
 			<tr>
 				<td style="width:300px;">
 				<b>Remarks/ Special Instructions:</b>
@@ -301,8 +317,8 @@ else{
 				</td>
 			</tr>
 		</table>
-	
-		<div style="width:800px; ">
+
+		<div style="width:790px;">
 			<p> A report of your travel must be submitted to the Agency Head/ Supervising Official within 7days from 
 			completion of travel. Liquidation of cash should be in accordance with Executive Order No. 77: Rules
 			and Regulation and New Rates of Allowances for Official Local and Foreign Travels of Government Personnel.
@@ -343,12 +359,13 @@ else{
 			<p style="text-align: center; color:#0f5387;">DICT Regional IV-A and IV-B</p>
 			<p style="text-align: center; color:#0f5387;">DICT Telecom Road, Capitol Site, Kumintang Ibaba, Batangas City 4200</p>
 			<p style="text-align: center; color:#0f5387;">Telepphone Number: (043) 773 0275</p>
-
 			</td>
+			</tr>
 		</table>
-	</div>
+		
+    </div>
+	
 
-</div>
-
+	
 </body>
 </html>

@@ -38,8 +38,14 @@ $result=mysqli_fetch_array($query);
       <span class="logo_name"><?php echo $result['fullName'];?></span>
     </div>
       <ul class="nav-links">
+      <li>
+          <a href="index.php" >
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
         <li>
-          <a href="index.php">
+          <a href="profile.php">
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
@@ -110,7 +116,7 @@ $result=mysqli_fetch_array($query);
           
         <!--Search box-->
       <div class="search">
-          <input class="search-box" placeholder="search">
+          <input class="search-box d-search table-filter" placeholder="search" data-table="table_content">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
 
@@ -192,7 +198,7 @@ $ret=mysqli_query($conn,"SELECT * from travelorder where requestedBy = '$result[
        </td>
       <?php
       if($row['reqStatus2']=='Approved'){
-        echo '<td><a href="../includes/download.php?controlNo='.$row['controlNo'].'target="_blank"><button class="view"><i class="	fa fa-cloud-download"></i></button></a></td>';
+        echo '<td><a href="../includes/downloadRDsigned.php?controlNo='.$row['controlNo'].'target="_blank"><button class="view"><i class="	fa fa-cloud-download"></i></button></a></td>';
       }
     
       ?>
@@ -236,7 +242,7 @@ sidebarBtn.onclick = function() {
       subMenu.classList.toggle("open-menu");
     }
 </script>
-
+<script src="../includes/search.js"></script>
 </body>
 </html>
 

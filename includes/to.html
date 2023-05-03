@@ -65,7 +65,7 @@ else{
     </style>
      
 
-    <title><?php echo "TO#".$controlNo."_".$rowi['requestedBy']."_".$rowi['dateRequested'];?></title> 
+    <title>Travel Order</title> 
 </head>
 <body>
 
@@ -96,7 +96,7 @@ else{
 				<td style="width:600px">
 					<!--Display Travel Order Number-->
 					<b>LOCAL TRAVEL ORDER NO:</b>
-					<b> <?php echo $rowi['travelorderNo'];?></b>
+					<b> 23-01-004</b>
 				</td>
 
 				<td style="text-align:right;">
@@ -104,7 +104,7 @@ else{
 					<b>DATE:</b>
 				</td>
 				<td>
-					<p><?php echo $rowi['dateRequested'];?></p>
+					<p>April 01, 2023</p>
 				</td>
 			</tr>
 
@@ -118,7 +118,7 @@ else{
 					<b>CTRL No:</b>
 				</td>
 				<td>
-					<p> <?php echo $rowi['controlNo'];?></p>
+					<p> 2023-01-0011</p>
 				</td>
 			</tr>
 		</table>
@@ -135,7 +135,7 @@ else{
 
 			<tr>
 				<td style="width:300px;">
-				<p><?php echo $rowi['travelers'];?></p>
+				<p>Juan Manuel Alfonso/ ITO III/ TOD</p>
 				</td>
 			</tr>
 		</table>
@@ -156,11 +156,11 @@ else{
 			<tr>
 				<td style="border-bottom:1px solid;">
 					<!--Destination info-->
-					<p><?php echo $rowi['destination'];?></p>
+					<p>Mount Malarayat Golf & Country Club</p>
 				</td>
 					<!--Purpose of Travel info-->
 				<td style="border-bottom:1px solid;">
-					<p><?php echo $rowi['purpose'];?></p>
+					<p>Committees for Ceremonial</p>
 				</td>
 			</tr>
 		</table>
@@ -178,11 +178,11 @@ else{
 			<tr>
 				<!--For Includive Date-->
 				<td style="border-bottom:1px solid;">
-				<p><?php echo $rowi['inclusiveDate'];?></p>
+				<p>01-23-2023</p>
 				</td>
 				<!--For End Date-->
 				<td style="border-bottom:1px solid;">
-				<p><?php echo $rowi['endDate'];?></p>
+				<p>01-23-2023</p>
 				</td>
 			</tr>
 		</table>
@@ -200,52 +200,29 @@ else{
 
 						<tr>
 							<td>
-							<b><input type="checkbox" <?php echo $rowi['actual'];?> disabled> Actual</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['actualDesc'])){
-							 echo $rowi['actualDesc'];}
-							 else{ echo 'N/A';}								
-							?></p>
+							<b><input type="checkbox"> Actual</b>
+							<p style="padding-left: 30px;"></p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
-							<b><input type="checkbox" <?php echo $rowi['perDiem'];?> disabled> Per Diem</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['perDiemDesc'])){
-							 echo $rowi['perDiemDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<b><input type="checkbox"> Per Diem</b>
+							<p style="padding-left: 30px;">fsdasdgahg hdgahsdfas fgdssa dasgdagsf gsdfasgdfa sdagsdfghasfd asdghasfdgas dgha</p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
-							<b><input type="checkbox" <?php echo $rowi['transpo'];?> disabled> Transportation</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['transpoDesc'])){
-							 echo $rowi['transpoDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<b><input type="checkbox"> Transportation</b>
+							<p style="padding-left: 30px;">fsdasdgahg hdgahsdfas fgdssa dasgdagsf gsdfasgdfa sdagsdfghasfd asdghasfdgas dgha</p>
 							</td>
 						</tr>
 
 						<tr>
 							<td>
-							<b> <input type="checkbox" <?php echo $rowi['others'];?> disabled> Others</b>
-							<p style="padding-left: 30px;">
-							<?php
-							 if(!empty($rowi['othersDesc'])){
-							 echo $rowi['othersDesc'];}
-							 else{ echo 'N/A';}								
-							?>
-							</p>
+							<b> <input type="checkbox"> Others</b>
+							<p style="padding-left: 30px;">fsdasdgahg hdgahsdfas fgdssa dasgdagsf gsdfasgdfa sdagsdfghasfd asdghasfdgas dgha</p>
 							</td>
 						</tr>
 			    </table>
@@ -262,25 +239,25 @@ else{
 
 						<tr style="text-align:center;">
 							<td style="width:100px;">
-							<b><input type="checkbox" <?php echo $rowi['generalfund'];?> disabled> General Fund</b>
+							<b><input type="checkbox"> General Fund</b>
 							</td>
 							<td style="width:100px;">
-							<b><input type="checkbox" <?php echo $rowi['projectfund'];?> disabled> Project Funds</b>
+							<b><input type="checkbox"> Project Funds</b>
 							</td>
 							<td style="width:100px;">
-							<b><input type="checkbox" <?php echo $rowi['others1'];?> disabled> Others</b>
+							<b><input type="checkbox"> Others</b>
 							</td>
 						</tr>
 
 						<tr style="text-align:center;">
 							<td style="border-bottom:1px solid;">
-							<p><?php echo $rowi['generalfundDesc'];?></p>
+							<p>NA</p>
 							</td>
 							<td style="border-bottom:1px solid;">
-							<p><?php echo $rowi['projectfundDesc'];?></p>
+							<p>NA</p>
 							</td>
 							<td style="border-bottom:1px solid;">
-							<p><?php echo $rowi['others1Desc'];?></p>
+							<p>NA</p>
 							</td>
 						</tr>
 
@@ -297,7 +274,7 @@ else{
 				</td>
 
 				<td style="width:540px; border-bottom: 1px solid;">
-				<p><?php echo $rowi['remarks'];?></p>
+				<p>330kms from DICT Occi to destination</p>
 				</td>
 			</tr>
 		</table>
@@ -322,12 +299,12 @@ else{
 			</tr>
 			<tr>
 				<td style="width:800px; height:150px; padding-bottom:0px;">
-					<b></b>
+					<b>NAME</b>
 					<p>Head, Technical Operations Division</p>
 				</td>
 
 				<td style="width:500px;">
-					<b></b>
+					<b>NAME</b>
 					<p>Regional Director</p>
 				</td>
 			</tr>

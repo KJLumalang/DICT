@@ -33,7 +33,7 @@ if (isset($_POST['upload'])) { // if save button on the form is clicked
       // move the uploaded (temporary) file to the specified destination
       if (move_uploaded_file($file, $destination)) {
 
-          $sql=mysqli_query($conn,"INSERT INTO gatepassfiles (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
+          $sql=mysqli_query($conn,"INSERT INTO gatepassfiles2 (controlNo, name, size, downloads) VALUES ('$controlNo', '$filename', $size, 0)");
 
           if ($sql) {
 

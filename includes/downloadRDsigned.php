@@ -9,10 +9,10 @@ if (isset($_GET['controlNo'])) {
     $id = $_GET['controlNo'];
 
     // fetch file to download from database
-    $result = mysqli_query($conn,"SELECT * FROM travelorderfiles WHERE controlNo= '$id' ");
+    $result = mysqli_query($conn,"SELECT * FROM travelorderfiles2 WHERE controlNo= '$id' ");
     $file = mysqli_fetch_assoc($result);
 
-    $filepath = '../tod/uploads/' . $file['name'];
+    $filepath = '../rd/uploads/' . $file['name'];
 
     if (file_exists($filepath)) {
         header('Content-Description: File Transfer');
@@ -21,8 +21,8 @@ if (isset($_GET['controlNo'])) {
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
-        header('Content-Length: ' . filesize('../tod/uploads/' . $file['name']));
-        readfile('../tod/uploads/' . $file['name']);
+        header('Content-Length: ' . filesize('../rd/uploads/' . $file['name']));
+        readfile('../rd/uploads/' . $file['name']);
 
         // Now update downloads count
         $newCount = $file['downloads'] + 1;

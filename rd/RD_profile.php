@@ -33,18 +33,19 @@ include ('../includes/login_check.php');
       <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
       <ul class="nav-links">
-        <li>
+      <li>
           <a href="index.php">
+            <i class='bx bx-car'></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="RD_travel.php">
             <i class='bx bx-car' ></i>
             <span class="links_name">Travel Request</span>
           </a>
         </li>
-        <li>
-          <a href="RD_gatepass.php">
-            <i class='bx bx-door-open' ></i>
-            <span class="links_name">Gatepass Request</span>
-          </a>
-        </li>
+    
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>

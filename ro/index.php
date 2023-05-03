@@ -62,7 +62,7 @@ $disgatepassnum = mysqli_num_rows($result);
         <li>
           <a href="RO_travel_request.php">
             <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Record Request</span>
+            <span class="links_name">Request Records</span>
           </a>
         </li>
       

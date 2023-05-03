@@ -1,20 +1,33 @@
-<?php
-// Starting the session, to use and
-// store data in session variable
-session_start();
+<?php 
+session_start(); 
+error_reporting();
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 
-  
+$query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
+$rowi = mysqli_fetch_array($query);   
+
+$result=mysqli_query($conn,"SELECT * from travelorder where reqStatus2 = 'Pending' ");
+$travelnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from travelorder where reqStatus2 = 'Approved' ");
+$approvedtravelnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from travelorder where reqStatus = 'Disapproved' or reqStatus2 = 'Disapproved'  ");
+$distravelnum = mysqli_num_rows($result);
 
 
+$result=mysqli_query($conn,"SELECT * from gatepass where reqStatus2 = 'Pending' ");
+$gatepassnum = mysqli_num_rows($result);
 
-$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$_SESSION[uname]'");
-$result=mysqli_fetch_array($query);
+$result=mysqli_query($conn,"SELECT * from gatepass where reqStatus2 = 'Aprroved' ");
+$approvedgatepassnum = mysqli_num_rows($result);
+
+$result=mysqli_query($conn,"SELECT * from gatepass where reqStatus = 'Disapproved' or reqStatus2 = 'Disapproved'  ");
+$disgatepassnum = mysqli_num_rows($result);
 
 
 ?>
-
 
 <!DOCTYPE html>
 
@@ -23,22 +36,29 @@ $result=mysqli_fetch_array($query);
     <meta charset="UTF-8">
  
     <link rel="stylesheet" href="style_STAFF.css">
-    <title>Staff-Profile</title>
-    
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Admin-Dashboard</title>
+  
+     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
+
 <body>
             <!-- sidebar menu -->
- <div class="sidebar">
+            <div class="sidebar">
     <div class="logo-details">
       <img src="profile.png" alt="">
-      <span class="logo_name"><?php echo $result['fullName'];?></span>
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
       <ul class="nav-links">
-        <li>
+      <li>
           <a href="index.php" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="profile.php" >
             <i class='fa fa-user-circle' ></i>
             <span class="links_name">Profile</span>
           </a>
@@ -102,70 +122,61 @@ $result=mysqli_fetch_array($query);
 
     </nav>
 
-         
-
-       <div class="home-content">
-
-       	<!--Staff Profile Information-->
-      	<div class="wrapper">
-      		<div class="top">
-      			<img src="profile.png" alt="user" width="100">
-      			<h3><?php echo $result['fullName'];?></h3>
-      			<p>Staff</p>
-      		</div>
-      		<div class="bottom">
-      			<div class="info">
-
-
-		        	<h4>Account Information</h4>
-
-		     <!--Staff Account Details-->
-      				<div class="info_data">
-      					<div class="data">
-      						<h6> User Email</h6>
-      						<p><?php echo $result['username'];?></p>
-      					</div>
-      					<div class="data">
-      						<h6> Full Name</h6>
-      						<p><?php echo $result['fullName'];?></p>
-      					</div>
-      					<div class="data">
-      						<h6> Sex</h6>
-      						<p><?php echo $result['sex'];?></p>
-      					</div>
-      					<div class="data">
-      						<h6>Age</h6>
-      						<p><?php echo $result['age'];?></p>
-      					</div>
-      					<div class="data">
-      						<h6>Position</h6>
-      						<p><?php echo $result['position'];?></p>
-      					</div>
-                <div class="data">
-                  <h6>Region</h6>
-                  <p><?php echo $result['region'];?></p>
-                </div>
-                <div class="data">
-                  <h6>Province</h6>
-                  <p><?php echo $result['province'];?></p>
-                </div>
-                <div class="data">
-                  <h6>Municipality</h6>
-                  <p>Municipality</p>
-                </div>
-                <div class="data">
-                  <h6>Division</h6>
-                  <p><?php echo $result['division'];?></p>
-                </div>
-      				</div>
-      			</div>
-      		</div>
-      	</div>
-       	</div>
-
+    <!--Dashboard page content-->
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box one">
+          <div class="right-side">
+            <div class="box-topic">Gatepass</div>
+            <div class="box-status">Approved</div>
+            <div class="number"><?php echo$approvedgatepassnum;?></div>
+          </div>
+          <i class='bx bx-credit-card pic app'></i>
+        </div>
+        <div class="box two">
+          <div class="right-side">
+            <div class="box-topic">Travel Order</div>
+            <div class="box-status">Approved</div>
+            <div class="number"><?php echo $approvedtravelnum;?></div>
+          </div>
+          <i class='bx bx-credit-card-front pic app' ></i>
+        </div>
+         <div class="box three">
+          <div class="right-side">
+            <div class="box-topic">Gatepass</div>
+            <div class="box-status">Pending</div>
+            <div class="number"><?php echo $gatepassnum;?></div>
+          </div>
+          <i class='bx bx-loader pic gate' ></i>
+        </div>
+        <div class="box four">
+          <div class="right-side">
+            <div class="box-topic">Travel Order</div>
+            <div class="box-status">Pending</div>
+            <div class="number"><?php echo $travelnum;?></div>
+          </div>
+          <i class='bx bx-loader-circle pic gate' ></i>
+        </div>
+         <div class="box five">
+          <div class="right-side">
+            <div class="box-topic">Gate Pass</div>
+            <div class="box-status">Disapproved</div>
+            <div class="number"><?php echo$disgatepassnum;?></div>
+          </div>
+          <i class='bx bxs-dislike pic dis' ></i>
+        </div>
+        <div class="box six">
+          <div class="right-side">
+            <div class="box-topic">Travel Order</div>
+            <div class="box-status">Disapproved</div>
+            <div class="number"><?php echo $distravelnum;?></div>
+          </div>
+          <i class='bx bx-dislike pic dis' ></i>
+        </div>
+      </div>
+      </div>
   </section>
-  
-<!--Sidebar Menu-->
+
   <script>
    let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -178,6 +189,15 @@ sidebarBtn.onclick = function() {
 }
  </script>
 
+<!-- Admin profile Submenu-->
+<script>
+    let subMenu=document.getElementById("subMenu");
+
+    function toggleMenu(){
+      subMenu.classList.toggle("open-menu");
+    }
+</script>
+
 
 <!--CSS Only-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -186,6 +206,7 @@ sidebarBtn.onclick = function() {
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

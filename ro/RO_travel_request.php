@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-error_reporting();
+error_reporting(0);
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 
@@ -14,6 +14,19 @@ if(ISSET($_POST['save'])){
   $travelorderNo = $_POST['dataid'];
 
   $update = mysqli_query($conn, "UPDATE travelorder SET controlNo = '$controlNo' where travelorderNo = '$travelorderNo' ");
+
+  if($update){
+
+    $alertStyle ="alert alert-success";
+    $statusMsg="Control No. Added";
+
+  }
+  else{
+    
+    $alertStyle ="alert alert-danger";
+    $statusMsg="An error Occurred!";
+
+  }
 
 
 }
@@ -148,15 +161,16 @@ if(ISSET($_POST['save'])){
           
         <!--Search box-->
       <div class="search">
-          <input class="search-box" placeholder="search">
+          <input class="search-box d-search table-filter" placeholder="search" data-table="table_content">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
 
       <div class="table_section">
+      <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
         <table class="table_content">
           <thead>
               <!-- Table for list of travel request -->
-            <tr>
+            <tr class="header">
               <th width="200px">ACTIONS</th>
               <th>Name/s:</th>
               <th>DATE REQUESTED</th>
@@ -264,7 +278,8 @@ sidebarBtn.onclick = function() {
 <!-- Bootstrap Popper with Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-</body>
+    <script src="../includes/search.js"></script>
+  </body>
 </html>
 
 

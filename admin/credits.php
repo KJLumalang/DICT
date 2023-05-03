@@ -1,16 +1,30 @@
-<?php
-// Starting the session, to use and
-// store data in session variable
-session_start();
+<?php 
+session_start(); 
 error_reporting(0);
-
 include ('../includes/config.php');
-include ('../includes/login_check.php');
+
 
 $alertStyle=$_GET['alertStyle'];
 $statusMsg=$_GET['statusMsg'];
 
+if(isset($_POST['reset'])){
 
+    $query=mysqli_query($conn,"UPDATE users SET token = '18'");
+    
+    if($query){
+
+      $alertStyle ="alert alert-success";
+      $statusMsg="Reset Succesful!";
+
+    }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
+
+    }
+
+}
 
 ?>
 
@@ -21,22 +35,27 @@ $statusMsg=$_GET['statusMsg'];
     <meta charset="UTF-8">
  
     <link rel="stylesheet" href="style.css">
-    <title>Admin-Request Records  </title>
-
-     <!-- Bootstrap CSS File-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Admin-Manage Roles </title>
   
+    <!-- Bootstrap CSS File-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-            <!-- sidebar menu -->
+    
+    <!--Header-->
   <div class="sidebar">
     <div class="logo-details">
       <img src="logo.png" alt="">
       <span class="logo_name">DICT</span>
     </div>
+
+<!-- sidebar menu -->
+
+<!-- sidebar menu -->
       <ul class="nav-links">
         <li>
           <a href="index.php">
@@ -57,7 +76,7 @@ $statusMsg=$_GET['statusMsg'];
           </a>
         </li>
         <li>
-          <a href="credits.php">
+          <a href="credits.php"  class="active">
             <i class='fa fa-plus'></i>
             <span class="links_name">Request Credits</span>
           </a>
@@ -92,7 +111,6 @@ $statusMsg=$_GET['statusMsg'];
 
 
                 </script>
-
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
@@ -100,12 +118,13 @@ $statusMsg=$_GET['statusMsg'];
           </a>
         </li>
       </ul>
+
   </div>
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Manage Requests</span>
+        <span class="dashboard">Request Credits</span>
       </div>
        <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
@@ -140,122 +159,70 @@ $statusMsg=$_GET['statusMsg'];
       </div>
     </nav>
 
+
+  
+
+
+  
     <div class="home-content">
       <div class="table">
-        <div class="table_ctnt">
-        <!--Search box-->
-      <div class="search">
-          <input class="search-box d-search table-filter" placeholder="search" data-table="table_content">
+      	<div class="table_ctnt">
+
+        <div class="search">
+          <input class="search-box d-search table-filter"  placeholder="search" data-table="table_content">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
-
       <div class="table_section">
       <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+
         <table class="table_content">
           <thead>
+          
+            <div class="add">
+              <form method="POST">
+             <button type="submit" class="addUser" name="reset"><i class="fa fa-plus-circle"></i>
+             Reset All
+            </button>
+              </form>
+            </div><br>
 
-           
-              <!-- Table for list of travel request -->
-
-              <tr class="header">
-              <th>DATE REQUESTED</th>
-              <th>TRAVEL ORDER NO.</th>
-              <th>CTRL NO.</th>
-              <th>DESTINATION</th>
-              <th>INCLUSIVE DATE OF TRAVEL</th>
-              <th>END DATE OF TRAVEL</th>
-              <th>PURPOSE</th>
-              <th>DTE</th>
-              <th>APPROPRIATION/FUND</th>
-              <th>REMARKS/ SPECIAL INSTRUCTIONS</th>
-              <th >HEAD, TOD <br>APPROVAL STATUS</th>
-              <th >REGIONAL DIRECTOR<br> APPROVAL STATUS</th>
-              <th colspan="3">ACTIONS</th>
+            <!-- Table for list of roles -->
+            <tr class="header">
+              <th width="300px">Name</th>
+              <th width="200px">Request Credits</th>
+              <th width="100px">ACTION</th>
             </tr>
 
           </thead>
-           <tbody>
+          <tbody>
+
             <?php
-
-            $cnt=1;
-            
-            $ret=mysqli_query($conn,"SELECT * from travelorder");
-            
-            
-                  while ($row=mysqli_fetch_array($ret)) {
-                    ?>
-            
-                <tr>
-                  <td><?php echo $row['dateRequested'];?></td>
-                  <td><?php  echo $row['travelorderNo'];?></td>
-                  <td><?php  echo $row['controlNo'];?></td>
-                  <td><?php  echo $row['destination'];?></td>
-                  <td><?php  echo $row['inclusiveDate'];?></td>
-                  <td><?php  echo $row['endDate'];?></td>
-                  <td><?php  echo $row['purpose'];?></td>
-                  <td><?php  echo $row['division'];?></td>
-                  <td>
-                  <?php 
-                  if(!empty($row['generalfund'])){
-                        echo "General Fund:";
-                        echo "<br>";
-                        echo $row['generalfundDesc'];
-                        echo "<br>";
-            
-                  }
-            
-                  if(!empty($row['projectfund'])){
-                    echo "Project Fund:";
-                    echo "<br>";
-                    echo $row['projectfundDesc'];
-                    echo "<br>";
-                  }
-            
-                  if(!empty($row['others'])){
-                    echo "Others:";
-                    echo "<br>";
-                    echo $row['othersDesc'];
-                    echo "<br>";
-                  }
-                  
-                  
-                  ?>
-                  </td>
-                  <td><?php  echo $row['remarks'];?></td>
-                  <td><?php  echo $row['reqStatus'];?></td>
-                  <td><?php  echo $row['reqStatus'];?></td>
-                  <td>
-                  <a href="../includes/to.php?controlNo=<?php echo $row['controlNo'];?>" target="_blank"><button class="view"><i class="fa fa-eye"></i></button></a>
-                </td>
-                
-                    <?php
-                    if($row['reqStatus2']=='Approved'){
-                      echo '<td><a href="../includes/downloadRDsigned.php?controlNo='.$row['controlNo'].'target="_blank"><button class="view"><i class="	fa fa-cloud-download"></i></button></a></td>';
-                    }
-                    ?>
-            
-                    <td>
-                    <a href="../includes/deleteTO.php?delId=<?php echo $row['travelorderNo'];?>"><button class="delete"><i class="fa fa-ban"></i></button></a>
-                  </td>
-                </tr>
-                    
+            $ret=mysqli_query($conn,"SELECT * from users");
+            while ($row=mysqli_fetch_array($ret)) {
+              ?>
+            <tr>
+              <td><?php echo $row['fullName'];?></td>
+              <td><?php  echo $row['token'];?></td>
+              <td >
+              <a href="resetCredits.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-plus-circle"></i></button></a>
+              </td>
+            </tr> 
             <?php 
-            
-            $cnt=$cnt+1;
-            
-            
+  
             }?>
-          </tbody>
 
-            
-         
+          </tbody>
         </table>
-        </div>
       </div>
+  </div>
       </div>
+
+      
     </div>
+
   </section>
 
+<!--Sidebar-->
   <script>
    let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -276,8 +243,20 @@ sidebarBtn.onclick = function() {
       subMenu.classList.toggle("open-menu");
     }
 </script>
-<script src="../includes/search.js"></script>
 
+<script>
+	var loadFile = function (event) {
+  var image = document.getElementById("output");
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+	</script>
+
+
+<!-- Bootstrap Popper with Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="../includes/search.js"></script>
 </body>
 </html>
 

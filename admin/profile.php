@@ -2,15 +2,13 @@
 session_start(); 
 error_reporting(0);
 include ('../includes/config.php');
+include ('../includes/login_check.php');
 
 
-if(isset($_GET['editId'])){
 
-    $_SESSION['editId'] = $_GET['editId'];
-    $query = mysqli_query($conn,"select * from users where id='$_SESSION[editId]'");
+    $query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
     $rowi = mysqli_fetch_array($query);   
 
-    }
 
 //UPDATE
     if(isset($_POST['submit'])){
@@ -48,8 +46,8 @@ if(isset($_GET['editId'])){
 
 ?>
 
-
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -156,7 +154,7 @@ if(isset($_GET['editId'])){
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass.html" class="sub-menu-link">
+            <a href="changepass.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
@@ -178,11 +176,11 @@ if(isset($_GET['editId'])){
               <div class="modal-header">
                 <h5 class="modal-title" id="EditProfileModalLabel">Edit Profile</h5>
               </div>
-              
               <div class="modal-body">
 
                 <!-- Form to be fill-out to Edit Admin Profile -->
-                <form  method="POST">
+                <form>
+
                     <div class="profile_pic">
                       <img src="profile.png" id="output" width=100 height=100 alt="">
                       <div class="round">
@@ -192,8 +190,8 @@ if(isset($_GET['editId'])){
                     </div>
 
                     <div class="full_name">
-                      <label for="addUser01">Full Name*</label>
-                      <input type="text" class="form-control" id="addUser01" name="fullname" value="<?php echo $rowi['fullName'];?>" required>
+                      <label for="Edit01">FullName*</label>
+                      <input type="text" class="form-control" id="Edit01" name="fullname" value="<?php echo $rowi['fullName'];?>" required>
                     </div><br>
 
                     <div class="sex">
@@ -206,14 +204,19 @@ if(isset($_GET['editId'])){
 
                     <div class="age">
                       <label for="age">Age*</label>
-                      <input type="text" class="form-control" id="age" name="age" value="<?php echo $rowi['age'];?>" required >
+                      <input type="text" class="form-control" id="age" name="age" name="age" value="<?php echo $rowi['age'];?>" required >
                     </div><br>
+
+                    <div class="user_email">
+                      <label for="Editr02">User Email*</label>
+                      <input type="email" class="form-control" id="Edit02" name="username" name="email" value="<?php echo $rowi['username'];?>"required>
+                    </div><br>
+
 
                     <div class="position">
-                      <label for="addUser02">Position*</label>
-                      <input type="text" class="form-control" id="addUser02" name="position" value="<?php echo $rowi['position'];?>" required>
+                      <label for="Edit03">Position*</label>
+                      <input type="text" class="form-control" id="Edit03" name="position" value="<?php echo $rowi['position'];?>"required>
                     </div><br>
-
 
                     <div class="role">
                       <label for="addUser03">Role*</label>
@@ -228,44 +231,33 @@ if(isset($_GET['editId'])){
                             }
                               }
                            echo '</select>';
-                            ?>   
+                            ?>       
                     </div><br>
 
                     <div class="region">
-                      <label for="addUser04">Region*</label>
-                      <input type="text" class="form-control" id="addUser04" name="region" value="<?php echo $rowi['region'];?>" required>
+                      <label for="Editr05">Region*</label>
+                      <input type="text" class="form-control" id="Edit05" name="region" value="<?php echo $rowi['region'];?>"required>
                     </div><br>
 
-
                     <div class="province">
-                      <label for="addUser05">Province*</label>
-                      <input type="text" class="form-control" id="addUser05"  name="province" value="<?php echo $rowi['province'];?>" required>
+                      <label for="Editr06">Province*</label>
+                      <input type="text" class="form-control" id="Edit06" name="province" value="<?php echo $rowi['province'];?>"required>
                     </div><br>
 
                     <div class="municipality">
-                      <label for="addUser06">Municipality*</label>
-                      <input type="text" class="form-control" id="addUser06" name="municipality" value="<?php echo $rowi['municipality'];?>" required>
+                      <label for="Editr07">Municipality*</label>
+                      <input type="text" class="form-control" id="Edit07" name="municipality" value="<?php echo $rowi['municipality'];?>"required>
                     </div><br>
 
-
-                    <div class="division_agency">
-                      <label for="addUser07">Division/Agency*</label>
-                      <input type="text" class="form-control" id="addUser07" name="division" value="<?php echo $rowi['division'];?>" required>
+                    <div class="division">
+                      <label for="Editr08">Division/Agency*</label>
+                      <input type="text" class="form-control" id="Edit08" name="division" value="<?php echo $rowi['division'];?>"required>
                     </div><br>
 
-                    <div class="user_email">
-                      <label for="addUser08">User Email*</label>
-                      <input type="text" class="form-control" id="addUser08" name="email" value="<?php echo $rowi['username'];?>" required>
-                    </div><br>
-
-                    <div class="password">
-                      <label for="addUser09">Password*</label>
-                      <input type="password" class="form-control" id="addUser09" name="password" value="<?php echo $rowi['password'];?>" required>
-                    </div><br>
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary" name="submit">Update</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
                     </div><br>
                 </form>
               </div>
@@ -280,11 +272,11 @@ if(isset($_GET['editId'])){
       		<div class="top">
       			<img src="profile.png" alt="user" width="100">
       			<h3><?php echo $rowi['fullName'];?></h3>
-      			<p><?php echo $rowi['userType'];?></p>            
+      			<p>Administrator</p>
       		</div>
-            
       		<div class="bottom">
       			<div class="info">
+
       				 <!--Modal - Button used to Edit Admin Profile-->
       				<div class="edit-button">
 		             <button type="button" class="btn btn-primary EditProfile" data-toggle="modal" data-target="#EditProfileModal"><i class="fa fa-edit"></i>
@@ -292,59 +284,50 @@ if(isset($_GET['editId'])){
 		            </button>
 		        	</div>
 
-                    <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
 		        	<h4>Account Information</h4>
 
-		     <!--Account Details-->
-      				<div class="info_data">     		
+		     <!--Admin Account Details-->
+      				<div class="info_data">
       					<div class="data">
-      						<h6> Full Name</h6>
-      						<p><?php echo $rowi['fullName'];?></p>
-      					</div>
-      					
-      					<div class="data">
-      						<h6>Email</h6>
-      						<p><?php echo $rowi['username'];?></p>
-      					</div>
-
-      					<div class="data">
-      						<h6>Role</h6>
-      						<p><?php echo $rowi['userType'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Sex</h6>
-      						<p><?php echo $rowi['sex'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Age</h6>
-      						<p><?php echo $rowi['age'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Position</h6>
-      						<p><?php echo $rowi['position'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Region</h6>
-      						<p><?php echo $rowi['region'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Municipality</h6>
-      						<p><?php echo $rowi['municipality'];?></p>
-      					</div>
-
-                          <div class="data">
-      						<h6>Division/Agency</h6>
-      						<p><?php echo $rowi['division'];?></p>
-      					</div>
-
-
-
-
+                  <h6> Fullname</h6>
+                  <p><?php echo $rowi['fullName'];?></p>
+                </div>
+                <div class="data">
+                  <h6> User Email</h6>
+                  <p><?php echo $rowi['username'];?></p>
+                </div>
+                <div class="data">
+                  <h6> Sex</h6>
+                  <p><?php echo $rowi['sex'];?></p>
+                </div>
+                <div class="data">
+                  <h6> Age</h6>
+                  <p><?php echo $rowi['age'];?></p>
+                </div>
+                <div class="data">
+                  <h6> Position</h6>
+                  <p><?php echo $rowi['position'];?></p>
+                </div>
+                <div class="data">
+                  <h6>Role</h6>
+                  <p><?php echo $rowi['role'];?></p>
+                </div>
+                <div class="data">
+                  <h6>Region</h6>
+                  <p><?php echo $rowi['region'];?></p>
+                </div>
+                <div class="data">
+                  <h6>Province</h6>
+                  <p><?php echo $rowi['province'];?></p>
+                </div>
+                <div class="data">
+                  <h6>Municipality</h6>
+                  <p><?php echo $rowi['municipality'];?></p>
+                </div>
+                <div class="data">
+                  <h6>Division/Agency</h6>
+                  <p><?php echo $rowi['division'];?></p>
+                </div>
       				</div>
       			</div>
       		</div>
@@ -384,6 +367,7 @@ sidebarBtn.onclick = function() {
 
 </script>
 
+
 <!--CSS Only-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -391,8 +375,6 @@ sidebarBtn.onclick = function() {
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
-
 
 </body>
 </html>

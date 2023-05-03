@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
 
 
 
-    $query=mysqli_query($conn,"insert into users(fullName,username,password,sex,age,position,userType,region,province,municipality,division) value('$fullname','$email','$password','$sex','$age','$position','$role','$region','$province','$municipality','$division')");
+    $query=mysqli_query($conn,"insert into users(fullName,username,password,sex,age,position,userType,region,province,municipality,division,token) value('$fullname','$email','$password','$sex','$age','$position','$role','$region','$province','$municipality','$division','18')");
     
     if($query){
 
@@ -86,11 +86,41 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="tra_request.php">
-            <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Request Records</span>
+          <a href="credits.php">
+            <i class='fa fa-plus'></i>
+            <span class="links_name">Request Credits</span>
           </a>
         </li>
+        <li>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request Records</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="tra_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gate_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
+        </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+
+
+                </script>
         <li class="log_out">
           <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
@@ -248,7 +278,7 @@ if(isset($_POST['submit'])){
       	<div class="table_ctnt">
         
       <div class="search">
-          <input class="search-box" placeholder="search">
+          <input class="search-box d-search table-filter"  placeholder="search" data-table="table_content">
           <button class="search_here"><i class='bx bx-search'></i></button>
       </div>
 
@@ -267,7 +297,7 @@ if(isset($_POST['submit'])){
             </div><br>
 
             <!-- Table for list of users -->
-            <tr>
+            <tr class="header">
               <th width="100px">ID NO.</th>
               <th>IMAGE</th>
               <th width="500px">FULLNAME</th>
@@ -277,7 +307,10 @@ if(isset($_POST['submit'])){
               <th width="200px">REGION</th>
               <th width="150px">PROVINCE</th>
               <th width="150px">DIVISION/AGENCY</th>
-              <th width="200px">ACTION</th>
+              <th colspan="3">ACTIONS</th>
+           
+           
+              
             </tr>
           </thead>
           <tbody>
@@ -302,9 +335,13 @@ if(isset($_POST['submit'])){
               <td><?php  echo $row['region'];?></td>
               <td><?php  echo $row['province'];?></td>
               <td><?php  echo $row['division'];?></td>
-              <td>
+              <td width="50px">
                <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="view"><i class="fa fa-eye"></i></button></a>
+              </td>
+               <td width="50px">
                <a href="viewProfile.php?editId=<?php echo $row['id'];?>"><button class="edit"><i class="fa fa-edit"></i></button></a>
+              </td>
+               <td width="50px">
                <a href="deleteUser.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-ban"></i></button></a>
               </td>
             </tr>
@@ -368,6 +405,7 @@ sidebarBtn.onclick = function() {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../includes/search.js"></script>
 
 
 </body>

@@ -1,7 +1,4 @@
 /* Googlefont Poppins CDN Link */
-@import "compass/css3";
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
   margin: 0;
@@ -20,13 +17,21 @@
   height: 80px;
   display: flex;
   align-items: center;
-  padding-left: 8px;
+}
+.sidebar .logo-details i{
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 60px;
+  margin-top:10px;
+  text-align: center
+
 }
 .sidebar .logo-details .logo_name{
   color: #fff;
   padding-top: 20px;
-  padding-left: 30px;
-  font-size: 30px;
+  padding-left: 10px;
+  font-size: 24px;
   font-weight: 500;
 }
 .sidebar{
@@ -79,6 +84,28 @@
   bottom: 0;
   width: 100%;
 }
+/* Dropdown Side bar menu */
+
+.sidenav .dropdown-container a{
+  text-decoration: none;
+  padding-left: 60px;
+  height:100px;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  height:40px;
+  color:black;
+}
+div .dropdown-container a{
+  background: #0f2a5c;
+}
+
+.sidenav .nav-links li.show i.arrow {
+  transform: rotate(-180deg);
+}
+
 .home-section{
   position: relative;
   background: #f5f5f5;
@@ -122,7 +149,7 @@ nav .sidebar-button i{
   margin-right: 0px;
 }
 
-/** Admin profile sub menu**/
+/** profile sub menu**/
 
 .home-section nav .profile-details{
   display: flex;
@@ -215,10 +242,10 @@ nav .profile-details i{
   font-size: 25px;
   color: #333;
 }
-/** End--Admin profile sub menu**/
+/** End-- profile sub menu**/
 
 
-/** Admin Account information**/
+/**  Account information**/
 .wrapper{
   position:absolute;
   margin-top:50px;
@@ -322,7 +349,7 @@ nav .profile-details i{
   outline: none;
   box-shadow: none;
 }
-/** End--Admin Account information**/
+/** End-- Account information**/
 
 /**Change password**/
 .mainDiv{
@@ -427,6 +454,189 @@ nav .profile-details i{
   opacity:0;
 }
 /**End--Profile Picture**/
+
+/**Travel Form**/
+.container{
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+
+}
+.container header{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.container header::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+}
+
+.container form{
+    position: relative;
+    margin-top: 16px;
+    min-height: 900px;
+    background-color: #fff;
+    overflow-y: hidden;
+    overflow-y: scroll;
+}
+.container form .form{
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+
+
+.container form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 3px 0;
+    color: #333;
+}
+.container form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.container form .DTE{
+  margin: 15px 0px 0px 0px;
+  
+}
+
+.container form .DTE .line{
+   border-top: 2px solid #a7a9ac;
+   margin-bottom:10px;
+  
+}
+form .fields .input-field1{
+    display: flex;
+    width: calc(100% / 2 - 15px);
+    flex-direction: column;
+    margin: 2px 0;
+
+}
+
+form .fields .input-field1 .oth{
+  width:100%;
+  
+}
+
+form .fields .input-field2{
+    display: flex;
+    width: calc(100% / 4 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+.container .input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.container .input-field input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.container .input-field input :focus,
+.container .input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+
+.container form button, .backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: gray;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container  .submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: #4070f4;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container  .reset{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px 10px;
+    background-color: gray;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+.container form .btnText, .reset{
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+}
+
+form .buttons .submit:hover{
+  background-color:#0b759c;
+  cursor:pointer;
+}
+form .buttons .submit:active{
+  background-color:#0b759c;
+  transform: translateY(2px);
+}
+form .buttons .reset:hover{
+  background-color:#bfbfbf;
+  cursor:pointer;
+}
+form .buttons .reset:active{
+  background-color:#bfbfbf;
+  transform: translateY(2px);
+}
+
+form .buttons{
+    display: flex;
+    text-align: : center;
+    max-width: 200px;
+    width: 100%;
+    float:right;
+}
+/** End-Travel Form**/
+
 .home-section .home-content{
   position: relative;
   padding-top: 100px;
@@ -578,12 +788,10 @@ nav .profile-details i{
 }
 .table_section{
   height: 650px;
-  width: 100%;
-  margin-top:`5px;
   overflow: auto;
   padding-left: 8px;
-  padding-right: 30px; 
-  padding-top:30px;
+  padding-right: 30px;
+  padding-top:50px;
 }
 .table_profile{
   background-color: #fff;
@@ -614,22 +822,20 @@ h2 {
 }
 table .table_content{
   width:100%;
+  min-width:1000px;
   border-collapse: collapse;
   position: relative;  
-  table-layout: fixed;
-  overflow-x:auto;
-  padding:10px;
-  white-space:nowrap;
 }
+
 thead th{
   top:0;
-  background-color:#c3cddb;
+ background-color:#c3cddb;
   color: #132747;
-  font-size:12px;
+  font-size:13px;
   text-align: center;
   white-space: nowrap;
 }
-td{
+th,td{
   border-bottom: 1px solid #fff;
   padding: 5px 5px;
   text-align:center;
@@ -639,7 +845,7 @@ td{
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
-  padding-right:30px;
+  padding-right:20px;
   word-wrap: break-word;
   white-space: nowrap;
 }
@@ -657,7 +863,6 @@ tbody:hover > tr:hover td {
 }
 .search{
   width:100%;
-  margin-left:20px;
 }
 .search-box{
   width:50%;
@@ -719,33 +924,33 @@ td button{
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  display:inline-block;
-  padding: 6px;
-  font-size: 18px;
-  width: 20px;
-  background:none;
-}
-
+  padding: 4px;
+  font-size: 13px;
+  color: #ffffff;
+  width: 100%;
 }
 .view{
- color:#848386;
+ color: white;
+ background-color: #848386;
 }
 .view:active{
-  color: #b3b0b8;
+  background-color: #b3b0b8;
   transform: translateY(3px);
 }
 .edit{
-  color:#3BD14E;
+  color: white;
+  background-color: #3BD14E;
 }
 .edit:active{
-  color: #4ef262;
+  background-color: #4ef262;
   transform: translateY(3px);
 }
 .delete{
-  color: #E84040;
+  color: white;
+  background-color: #E84040;
 }
 .delete:active{
-  color: #f25e5e;
+  background-color: #f25e5e;
   transform: translateY(3px);
 }
 .act{
@@ -906,5 +1111,29 @@ input{
     left: 60px;
     width: calc(100% - 60px);
   }
+  @media (max-width: 750px) {
+    .container form{
+        overflow-y: scroll;
+    }
+    .container form::-webkit-scrollbar{
+       display: none;
+    }
+    form .fields .input-field{
+        width: calc(100% / 3 - 15px);
+    }
 }
- 
+
+@media (max-width: 550px) {
+    form .fields .input-field1{
+        width: 100%;
+    }
+  form .fields .input-field2{
+        width: 50%;
+    
+    display: flex;
+    width: calc(100% / 3 - 30px);
+    flex-direction: column;
+    margin: 4px 0;
+    font-size: 10px;
+  }
+}

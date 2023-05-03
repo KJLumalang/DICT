@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     if($query){
 
       $alertStyle ="alert alert-success";
-      $statusMsg="User Added Successfully!";
+      $statusMsg="Role Added Successfully!";
 
     }
     else{
@@ -75,13 +75,43 @@ if(isset($_POST['submit'])){
           </a>
         </li>
         <li>
-          <a href="tra_request.php">
-            <i class='bx bx-clipboard' ></i>
-            <span class="links_name">Request Records</span>
+          <a href="credits.php">
+            <i class='fa fa-plus'></i>
+            <span class="links_name">Request Credits</span>
           </a>
         </li>
+        <li>
+            <a class="dropdown-btn">
+              <i class="bx bx-file-blank"></i>
+              <span class="links_name">Request Records</span> <i class="fa fa-caret-down arrow"></i>
+            </a>
+
+          <div class="dropdown-container">
+              <a href="tra_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
+              <a href="gate_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
+          </div>
+        </li>
+
+                <script>
+                 var dropdown = document.getElementsByClassName("dropdown-btn");
+                  var i;
+
+                for (i = 0; i < dropdown.length; i++) {
+                  dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                      dropdownContent.style.display = "none";
+                    } else {
+                      dropdownContent.style.display = "block";
+                    }
+                  });
+                }
+
+
+                </script>
         <li class="log_out">
-          <a href="../index.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -118,7 +148,7 @@ if(isset($_POST['submit'])){
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>
@@ -180,7 +210,7 @@ if(isset($_POST['submit'])){
             <tr>
               <th width="200px">NO.</th>
               <th width="300px">ROLE</th>
-              <th width="200px">ACTION</th>
+              <th width="100px">ACTION</th>
             </tr>
 
           </thead>
@@ -193,7 +223,7 @@ if(isset($_POST['submit'])){
             <tr>
               <td><?php echo $row['id'];?></td>
               <td><?php  echo $row['roleName'];?></td>
-              <td>
+              <td >
               <a href="deleteRole.php?delId=<?php echo $row['id'];?>"><button class="delete"><i class="fa fa-trash"></i></button></a>
               </td>
             </tr> 

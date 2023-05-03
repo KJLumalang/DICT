@@ -3,134 +3,124 @@ session_start();
 error_reporting(0);
 include ('../includes/config.php');
 
+$query = mysqli_query($conn,"select * from users where id='$_SESSION[id]'");
+$rowi = mysqli_fetch_array($query);   
 
-if(isset($_GET['editId'])){
+// Retrieve user input from registration form
+if(isset($_POST['submit'])){
 
-    $_SESSION['editId'] = $_GET['editId'];
-    $query = mysqli_query($conn,"select * from users where id='$_SESSION[editId]'");
-    $rowi = mysqli_fetch_array($query);   
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $sex = $_POST['sex'];
+    $age = $_POST['age'];
+    $position = $_POST['position'];
+    $role = $_POST['role'];
+    $region = $_POST['region'];
+    $province = $_POST['province'];
+    $municipality = $_POST['municipality'];
+    $division = $_POST['division'];
+
+
+
+    $query=mysqli_query($conn,"insert into users(fullName,username,password,sex,age,position,userType,region,province,municipality,division) value('$fullname','$email','$password','$sex','$age','$position','$role','$region','$province','$municipality','$division')");
+    
+    if($query){
+
+      $alertStyle ="alert alert-success";
+      $statusMsg="User Added Successfully!";
 
     }
+    else{
+      
+      $alertStyle ="alert alert-danger";
+      $statusMsg="An error Occurred!";
 
-//UPDATE
-    if(isset($_POST['submit'])){
-
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $sex = $_POST['sex'];
-        $age = $_POST['age'];
-        $position = $_POST['position'];
-        $role = $_POST['role'];
-        $region = $_POST['region'];
-        $province = $_POST['province'];
-        $municipality = $_POST['municipality'];
-        $division = $_POST['division'];
-    
-    
-    
-        $ret=mysqli_query($conn,"update users set fullName='$fullname',username='$email',password='$password',sex='$sex',age='$age',position='$position',userType='$role',region='$region',province='$province',municipality='$municipality',division='$division' where id='$_SESSION[editId]'");
-        
-        if($ret){
-
-        echo "<script type = \"text/javascript\">
-        window.location = (\"viewProfile.php?editId=$_SESSION[editId];\")
-        </script>"; 
-   
-        }
-        else{
-          
-          $alertStyle ="alert alert-danger";
-          $statusMsg="An error Occurred!";
-    
-        }
     }
+}
+ 
 
 ?>
 
-
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
  
-    <link rel="stylesheet" href="style.css">
-    <title>Admin-Profile </title>
+    <link rel="stylesheet" href="style_HR.css">
+    <title>HR-Profile </title>
     
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-            <!-- sidebar menu -->
- <div class="sidebar">
+
+  <!-- sidebar menu -->
+  <div class="sidebar">
     <div class="logo-details">
-      <img src="logo.png" alt="">
-      <span class="logo_name">DICT</span>
+      <img src="profile.png" alt="">
+      <span class="logo_name"><?php echo $rowi['fullName'];?></span>
     </div>
-      <ul class="nav-links">
-        <li>
-          <a href="index.php">
-            <i class='bx bx-grid-alt' ></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="user.php">
-            <i class='bx bxs-group' ></i>
-            <span class="links_name">Users</span>
-          </a>
-        </li>
-        <li>
-          <a href="role.php">
-            <i class='fa fa-star'></i>
-            <span class="links_name">Role</span>
-          </a>
-        </li>
-        <li>
-          <a href="credits.php">
-            <i class='fa fa-plus'></i>
-            <span class="links_name">Request Credits</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-btn">
-            <i class="bx bx-file-blank"></i>
-            <span class="links_name">Request Records</span> <i class="fa fa-caret-down arrow"></i>
-          </a>
 
-        <div class="dropdown-container">
-            <a href="tra_request.php" class="sub-item"> <i></i><span class="links_name">Travel Order</span></a>
-            <a href="gate_request.php" class="sub-item"> <i></i> <span class="links_name">Gate Pass</span></a>
-        </div>
-      </li>
+    <div class="sidenav">
+		  <a href="index.php" style:"text-decoration: none;"><i class='bx bx-grid-alt'></i>
+		    <span class="links_name">Dashboard</span></a>
 
-              <script>
-               var dropdown = document.getElementsByClassName("dropdown-btn");
-                var i;
+		  <button class="dropdown-btn"> <i class='fa fa-wpforms'></i>
+		    <span class="links_name">Travel Order</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 24px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="todApproved.php">TOD Approved</a>
+		    <a href="rdApproved.php">TOD & RD Approved</a>
+			</div>
 
-              for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function() {
-                  this.classList.toggle("active");
-                  var dropdownContent = this.nextElementSibling;
-                  if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                  } else {
-                    dropdownContent.style.display = "block";
-                  }
-                });
-              }
+      <button class="dropdown-btn"> <i class='fa fa-wpforms'></i>
+		    <span class="links_name">Gatepass</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 24px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="todgpApproved.php">TOD Approved</a>
+		    <a href="employeegpApproved.php">TOD & DE Approved</a>
+			</div>
 
+			<button class="dropdown-btn">  <i class="bx bx-file-blank"></i>
+		    <span class="links_name">Request History</span>
+		    <i class="fa fa-caret-down arrow" style="padding-left: 0px;"></i>
+		  </button>
+		  	<div class="dropdown-container">
+		    <a href="travel_request.php">Travel Order</a>
+		    <a href="gatepass_request.php">GatePass</a>
+			</div>
 
-              </script>
-        <li class="log_out">
-          <a href="../includes/logout.php">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Log out</span>
-          </a>
-        </li>
-      </ul>
-  </div>
+		
+	          <a href="../includes/logout.php" class="log_out">
+	            <i class='bx bx-log-out'></i>
+	            <span class="links_name">Log out</span>
+	          </a>
+</div>
+
+<script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
+      </script>
+          
+</div>
 
   <section class="home-section">
     <nav class="nav_menu">
@@ -140,23 +130,23 @@ if(isset($_GET['editId'])){
       </div>
       <div class="profile-details">
         <img src="profile.png" alt="" onclick="toggleMenu()">
-        <span class="admin_name" onclick="toggleMenu()">Administrator </span>
+        <span class="admin_name" onclick="toggleMenu()"><?php echo $rowi['userType'];?></span>
       </div>
 
       <div class="sub-menu-wrap" id="subMenu">
         <div class="sub-menu">
           <div class="user-info">
             <img src="profile.png" alt="">
-            <h5>Administrator</h5>
+            <h5><?php echo $rowi['fullName'];?></h5>
           </div>
           <hr>
 
-            <a href="profile.php" class="sub-menu-link">
+            <a href="profile_HR.php" class="sub-menu-link">
               <i class='fa fa-user' ></i>
               <p> View Profile </p>
               <span>></span>
             </a>
-            <a href="changepass.html" class="sub-menu-link">
+            <a href="changepass_HR.php" class="sub-menu-link">
               <i class='fa fa-lock' ></i>
               <p> Change Password </p>
               <span>></span>
@@ -178,7 +168,6 @@ if(isset($_GET['editId'])){
               <div class="modal-header">
                 <h5 class="modal-title" id="EditProfileModalLabel">Edit Profile</h5>
               </div>
-              
               <div class="modal-body">
 
                 <!-- Form to be fill-out to Edit Admin Profile -->
@@ -268,6 +257,7 @@ if(isset($_GET['editId'])){
                       <button type="submit" class="btn btn-primary" name="submit">Update</button>
                     </div><br>
                 </form>
+                
               </div>
             </div>
           </div>
@@ -280,23 +270,16 @@ if(isset($_GET['editId'])){
       		<div class="top">
       			<img src="profile.png" alt="user" width="100">
       			<h3><?php echo $rowi['fullName'];?></h3>
-      			<p><?php echo $rowi['userType'];?></p>            
+      			<p><?php echo $rowi['userType'];?></p>
       		</div>
-            
       		<div class="bottom">
       			<div class="info">
-      				 <!--Modal - Button used to Edit Admin Profile-->
-      				<div class="edit-button">
-		             <button type="button" class="btn btn-primary EditProfile" data-toggle="modal" data-target="#EditProfileModal"><i class="fa fa-edit"></i>
-		              Edit Profile
-		            </button>
-		        	</div>
 
-                    <div class="<?php echo $alertStyle;?>" role="alert"><?php echo $statusMsg;?></div>
+
 		        	<h4>Account Information</h4>
 
-		     <!--Account Details-->
-      				<div class="info_data">     		
+		     <!--Admin Account Details-->
+      			<div class="info_data">     		
       					<div class="data">
       						<h6> Full Name</h6>
       						<p><?php echo $rowi['fullName'];?></p>
@@ -341,10 +324,6 @@ if(isset($_GET['editId'])){
       						<h6>Division/Agency</h6>
       						<p><?php echo $rowi['division'];?></p>
       					</div>
-
-
-
-
       				</div>
       			</div>
       		</div>
@@ -384,6 +363,7 @@ sidebarBtn.onclick = function() {
 
 </script>
 
+
 <!--CSS Only-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
@@ -391,8 +371,6 @@ sidebarBtn.onclick = function() {
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
-
 
 </body>
 </html>
