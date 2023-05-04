@@ -3,6 +3,7 @@
 // Starting the session, to use and
 // store data in session variable
 session_start();
+error_reporting(0);
 include ('../includes/config.php');
 include ('../includes/login_check.php');
 

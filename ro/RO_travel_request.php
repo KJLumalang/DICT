@@ -73,7 +73,7 @@ if(ISSET($_POST['save'])){
         </li>
 
         <li class="log_out">
-          <a href="../index.php">
+          <a href="../includes/logout.php">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -108,7 +108,7 @@ if(ISSET($_POST['save'])){
               <p> Change Password </p>
               <span>></span>
             </a>
-            <a href="../index.php" class="sub-menu-link">
+            <a href="../includes/logout.php" class="sub-menu-link">
               <i class='fa fa-sign-out'></i>
               <p> Logout </p>
               <span>></span>

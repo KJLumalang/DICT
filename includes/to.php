@@ -323,11 +323,13 @@ else{
 			<tr>
 				<td style="width:800px; height:150px; padding-bottom:0px;">
 					<b></b>
+					<b>DR. MARIA GRACIELA R. BUCAD</b>
 					<p>Head, Technical Operations Division</p>
 				</td>
 
 				<td style="width:500px;">
 					<b></b>
+					<b>CHERYL C. ORTEGA</b>
 					<p>Regional Director</p>
 				</td>
 			</tr>
